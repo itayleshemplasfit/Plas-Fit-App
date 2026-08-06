@@ -7,7 +7,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="פלספיט">
 <meta name="theme-color" content="#D85A30">
-<link rel="manifest" href="data:application/manifest+json,{%22name%22:%22%D7%A4%D7%9C%D7%A1%D7%A4%D7%99%D7%98%20-%20%D7%A0%D7%99%D7%94%D7%95%D7%9C%20%D7%AA%D7%91%D7%A0%D7%99%D7%95%D7%AA%22,%22short_name%22:%22%D7%A4%D7%9C%D7%A1%D7%A4%D7%99%D7%98%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23f0f0f0%22,%22theme_color%22:%22%23D85A30%22,%22orientation%22:%22portrait%22}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>פלספיט - ניהול תבניות</title>
 <style>
@@ -19,7 +18,6 @@ body{background:#f0f0f0;display:flex;justify-content:center}
 .screen.active{display:flex}
 .topbar{background:#fff;border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10}
 .logo{font-size:16px;font-weight:700;color:var(--text);letter-spacing:1px}
-.logo span{color:var(--orange)}
 .topbar-back{background:none;border:none;cursor:pointer;color:var(--muted);font-size:22px;padding:4px;line-height:1}
 .content{flex:1;padding:16px;overflow-y:auto}
 .bottombar{background:#fff;border-top:1px solid var(--border);display:flex;position:sticky;bottom:0}
@@ -29,8 +27,6 @@ body{background:#f0f0f0;display:flex;justify-content:center}
 .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
 .login-card{background:#fff;border-radius:16px;padding:2rem 1.5rem;width:100%;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
 .login-logo{text-align:center;margin-bottom:2rem}
-.login-logo .brand{font-size:28px;font-weight:700;letter-spacing:2px}
-.login-logo .brand span{color:var(--orange)}
 .login-logo .sub{font-size:13px;color:var(--muted);margin-top:6px}
 label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px;font-weight:500}
 select,input,textarea{width:100%;border:1px solid var(--border);border-radius:10px;padding:11px 13px;font-size:15px;background:#fff;color:var(--text);margin-bottom:14px;-webkit-appearance:none;appearance:none}
@@ -41,7 +37,7 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--orange)}
 .greeting{margin-bottom:1.5rem}
 .greeting .name{font-size:20px;font-weight:600;color:var(--text)}
 .greeting .sub{font-size:13px;color:var(--muted);margin-top:3px}
-.action-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:1.2rem;margin-bottom:12px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s}
+.action-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:1.2rem;margin-bottom:12px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:border-color 0.15s}
 .action-card:active{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange-light)}
 .icon-wrap{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:24px}
 .icon-wrap.orange{background:var(--orange-light)}
@@ -59,7 +55,8 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--orange)}
 .photo-area{border:1.5px dashed var(--border);border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;margin-bottom:14px;color:var(--muted)}
 .photo-area .icon{font-size:28px;display:block;margin-bottom:6px}
 .photo-area .txt{font-size:13px}
-.photo-preview{width:100%;border-radius:10px;margin-bottom:14px;max-height:200px;object-fit:cover}
+.photo-preview{width:100%;border-radius:10px;margin-bottom:8px;max-height:200px;object-fit:cover}
+.photo-uploading{text-align:center;padding:10px;font-size:13px;color:var(--muted);margin-bottom:8px}
 .report-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:1rem 1.2rem;margin-bottom:10px;cursor:pointer}
 .report-card:active{border-color:var(--orange)}
 .report-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
@@ -77,12 +74,12 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--orange)}
 .search-wrap{position:relative;margin-bottom:14px}
 .search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:18px;pointer-events:none}
 .search-wrap input{padding-right:38px;margin-bottom:0}
-.detail-photo{width:100%;border-radius:14px;margin-bottom:12px;max-height:220px;object-fit:cover}
 .detail-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:1.2rem;margin-bottom:12px}
 .detail-row{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)}
 .detail-row:last-child{border-bottom:none}
 .dlabel{font-size:13px;color:var(--muted)}
 .dvalue{font-size:13px;color:var(--text);font-weight:600;text-align:left;max-width:60%}
+.detail-photo{width:100%;border-radius:10px;margin-bottom:12px;max-height:300px;object-fit:contain;background:#f0f0f0}
 .loader{text-align:center;padding:3rem 1rem;color:var(--muted)}
 .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -100,13 +97,10 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--orange)}
 .ss-option:hover,.ss-option.highlighted{background:var(--orange-light);color:var(--orange);font-weight:600}
 .ss-empty{padding:11px 13px;font-size:14px;color:var(--muted)}
 input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
-/* ver desc display */
 .ver-desc-box{background:#f8f8f8;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--muted);margin-bottom:14px;min-height:36px;display:none}
 .ver-desc-box.visible{display:block}
-
-/* ── DASHBOARD ── */
+/* DASHBOARD */
 #screen-dashboard{background:#f0f0f0}
-.dash-header{padding:16px 16px 8px;font-size:18px;font-weight:700;color:var(--text)}
 .dash-cols{display:flex;gap:12px;padding:0 12px 16px;align-items:flex-start}
 .dash-col{flex:1;min-width:0}
 .dash-col-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-radius:10px 10px 0 0;display:flex;align-items:center;gap:6px}
@@ -129,7 +123,6 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
 </head>
 <body>
 <div id="app">
-
 <div class="toast" id="toast"></div>
 
 <!-- LOGIN -->
@@ -138,16 +131,14 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
     <div class="login-card">
       <div class="login-logo">
         <img id="app-logo-lg" alt="פלספיט" style="height:60px;object-fit:contain;margin-bottom:8px">
-        <div class="sub" style="font-size:13px;color:var(--muted);margin-top:6px">מערכת ניהול תבניות</div>
+        <div class="sub">מערכת ניהול תבניות</div>
       </div>
-      <div id="login-step1">
-        <label>בחר את שמך</label>
-        <select id="worker-select"><option value="">-- טוען רשימה... --</option></select>
-        <label>קוד אישי</label>
-        <input type="password" id="worker-code" placeholder="הכנס קוד" inputmode="numeric" maxlength="10">
-        <button class="btn-primary" onclick="doLogin()" id="login-btn">כניסה</button>
-        <div id="login-error" style="color:#c0392b;font-size:13px;text-align:center;margin-top:10px;display:none">שם או קוד שגוי, נסה שוב</div>
-      </div>
+      <label>בחר את שמך</label>
+      <select id="worker-select"><option value="">-- טוען רשימה... --</option></select>
+      <label>קוד אישי</label>
+      <input type="password" id="worker-code" placeholder="הכנס קוד" inputmode="numeric" maxlength="10">
+      <button class="btn-primary" onclick="doLogin()" id="login-btn">כניסה</button>
+      <div id="login-error" style="color:#c0392b;font-size:13px;text-align:center;margin-top:10px;display:none">שם או קוד שגוי, נסה שוב</div>
     </div>
   </div>
 </div>
@@ -207,13 +198,13 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
       <label>תאריך ושעה</label>
       <input id="fix-date" readonly style="background:#f8f8f8;color:var(--muted)">
       <label>מספר תבנית *</label>
-      <div class="search-select-wrap" id="fix-mold-wrap">
+      <div class="search-select-wrap">
         <input type="text" id="fix-mold-input" placeholder="הקלד לחיפוש תבנית..." autocomplete="off" oninput="filterDropdown('fix-mold')" onfocus="openDropdown('fix-mold')" onblur="delayClose('fix-mold')" style="margin-bottom:0">
         <div class="ss-dropdown" id="fix-mold-dropdown"></div>
       </div>
       <input type="hidden" id="fix-mold">
       <label>וורסיה בתבנית *</label>
-      <div class="search-select-wrap" id="fix-ver-wrap">
+      <div class="search-select-wrap">
         <input type="text" id="fix-ver-input" placeholder="הקלד לחיפוש וורסיה..." autocomplete="off" oninput="filterDropdown('fix-ver')" onfocus="openDropdown('fix-ver')" onblur="delayClose('fix-ver')" style="margin-bottom:0" disabled>
         <div class="ss-dropdown" id="fix-ver-dropdown"></div>
       </div>
@@ -229,7 +220,8 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
         <div class="txt">לחץ לצילום / בחירת תמונה</div>
       </div>
       <img id="fix-preview" class="photo-preview" style="display:none">
-      <button id="fix-photo-clear" class="btn-secondary" style="display:none;margin-top:-8px;padding:8px;font-size:13px" onclick="clearPhoto('fix')">🗑️ הסר תמונה</button>
+      <div id="fix-photo-uploading" class="photo-uploading" style="display:none">⏳ מעלה תמונה...</div>
+      <button id="fix-photo-clear" class="btn-secondary" style="display:none;margin-top:0;padding:8px;font-size:13px" onclick="clearPhoto('fix')">🗑️ הסר תמונה</button>
       <label>סטטוס</label>
       <div class="status-toggle">
         <button class="status-btn sel-wait" id="fix-s-wait" onclick="setStatus('fix','wait')">⏳ ממתין</button>
@@ -252,30 +244,25 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
       <label>תאריך ושעה</label>
       <input id="ver-date" readonly style="background:#f8f8f8;color:var(--muted)">
       <label>מספר תבנית *</label>
-      <div class="search-select-wrap" id="ver-mold-wrap">
+      <div class="search-select-wrap">
         <input type="text" id="ver-mold-input" placeholder="הקלד לחיפוש תבנית..." autocomplete="off" oninput="filterDropdown('ver-mold')" onfocus="openDropdown('ver-mold')" onblur="delayClose('ver-mold')" style="margin-bottom:0">
         <div class="ss-dropdown" id="ver-mold-dropdown"></div>
       </div>
       <input type="hidden" id="ver-mold">
-
       <label>וורסיה נוכחית *</label>
-      <div class="search-select-wrap" id="ver-cur-wrap">
+      <div class="search-select-wrap">
         <input type="text" id="ver-cur-input" placeholder="הקלד לחיפוש וורסיה..." autocomplete="off" oninput="filterDropdown('ver-cur')" onfocus="openDropdown('ver-cur')" onblur="delayClose('ver-cur')" style="margin-bottom:0" disabled>
         <div class="ss-dropdown" id="ver-cur-dropdown"></div>
       </div>
       <input type="hidden" id="ver-cur">
-      <!-- תיאור וורסיה נוכחית -->
       <div class="ver-desc-box" id="ver-cur-desc"></div>
-
       <label>וורסיה לאחר החלפה *</label>
-      <div class="search-select-wrap" id="ver-new-wrap">
+      <div class="search-select-wrap">
         <input type="text" id="ver-new-input" placeholder="הקלד לחיפוש וורסיה..." autocomplete="off" oninput="filterDropdown('ver-new')" onfocus="openDropdown('ver-new')" onblur="delayClose('ver-new')" style="margin-bottom:0" disabled>
         <div class="ss-dropdown" id="ver-new-dropdown"></div>
       </div>
       <input type="hidden" id="ver-new">
-      <!-- תיאור וורסיה חדשה -->
       <div class="ver-desc-box" id="ver-new-desc"></div>
-
       <label>הערות</label>
       <textarea id="ver-notes" rows="2" placeholder="הערות נוספות" style="resize:none"></textarea>
       <label>תמונה</label>
@@ -285,7 +272,8 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
         <div class="txt">לחץ לצילום / בחירת תמונה</div>
       </div>
       <img id="ver-preview" class="photo-preview" style="display:none">
-      <button id="ver-photo-clear" class="btn-secondary" style="display:none;margin-top:-8px;padding:8px;font-size:13px" onclick="clearPhoto('ver')">🗑️ הסר תמונה</button>
+      <div id="ver-photo-uploading" class="photo-uploading" style="display:none">⏳ מעלה תמונה...</div>
+      <button id="ver-photo-clear" class="btn-secondary" style="display:none;margin-top:0;padding:8px;font-size:13px" onclick="clearPhoto('ver')">🗑️ הסר תמונה</button>
       <label>סטטוס</label>
       <div class="status-toggle">
         <button class="status-btn sel-wait" id="ver-s-wait" onclick="setStatus('ver','wait')">⏳ ממתין</button>
@@ -308,9 +296,7 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
       <span class="search-icon">🔍</span>
       <input type="text" id="search-input" placeholder='מק"ט, תיאור או מספר תבנית' oninput="doSearch()">
     </div>
-    <div id="search-results">
-      <div class="empty"><span class="icon">🔍</span>הקלד לחיפוש מוצר</div>
-    </div>
+    <div id="search-results"><div class="empty"><span class="icon">🔍</span>הקלד לחיפוש מוצר</div></div>
   </div>
 </div>
 
@@ -356,7 +342,7 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
   <div class="topbar">
     <button class="topbar-back" onclick="goTo('screen-home')">›</button>
     <span class="logo" style="font-size:15px">📊 דשבורד תבניות</span>
-    <button class="dash-refresh" onclick="loadDashboard()" title="רענן">🔄</button>
+    <button class="dash-refresh" onclick="loadDashboard()">🔄</button>
   </div>
   <div style="padding:12px 16px 4px">
     <div style="font-size:12px;color:var(--muted)">לחץ על החצים לשינוי סדר עדיפות — נשמר לכולם</div>
@@ -366,7 +352,7 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
   </div>
 </div>
 
-</div><!-- /app -->
+</div>
 
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbzJsLI-zc8KWichm9EiXKlibsFVoy9Du-8jYSR2cKqigsf4I7ypUkopYyEcLOB__xcS/exec';
@@ -378,6 +364,48 @@ let currentFilter = 'all';
 let allReports = [];
 let allMolds = [];
 let dashData = { fix: [], ver: [] };
+
+// תמונות — מאחסן URL שהוחזר מ-Drive
+let fixPhotoUrl = '';
+let verPhotoUrl = '';
+
+// ── JSONP ──
+let _cbCount = 0;
+function jsonp(params) {
+  return new Promise((resolve, reject) => {
+    const cbName = '_pfcb' + (++_cbCount);
+    const timeout = setTimeout(() => {
+      delete window[cbName];
+      const s = document.getElementById(cbName);
+      if (s) s.remove();
+      reject(new Error('timeout'));
+    }, 15000);
+    window[cbName] = (data) => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      const s = document.getElementById(cbName);
+      if (s) s.remove();
+      resolve(data);
+    };
+    params.callback = cbName;
+    const url = API + '?' + new URLSearchParams(params);
+    const script = document.createElement('script');
+    script.id = cbName;
+    script.src = url;
+    script.onerror = () => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      script.remove();
+      reject(new Error('network error'));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+async function apiPost(body) {
+  const res = await fetch(API, { method: 'POST', body: JSON.stringify(body) });
+  return res.json();
+}
 
 // ── ניווט ──
 function goTo(id) {
@@ -401,7 +429,7 @@ async function doLogin() {
   btn.textContent = 'מאמת...'; btn.disabled = true;
   document.getElementById('login-error').style.display = 'none';
   try {
-    const res = await api({ action: 'validateWorker', name, code });
+    const res = await jsonp({ action: 'validateWorker', name, code });
     if (res.valid) {
       currentWorker = name;
       localStorage.setItem('pf_worker', name);
@@ -431,7 +459,7 @@ async function autoLogin() {
   const savedCode = localStorage.getItem('pf_code');
   if (!savedName || !savedCode) { loadWorkersDropdown(); return; }
   try {
-    const res = await api({ action: 'validateWorker', name: savedName, code: savedCode });
+    const res = await jsonp({ action: 'validateWorker', name: savedName, code: savedCode });
     if (res.valid) {
       currentWorker = savedName;
       document.getElementById('greeting-name').textContent = currentWorker;
@@ -448,7 +476,7 @@ async function autoLogin() {
 
 async function loadWorkersDropdown() {
   try {
-    const data = await api({ action: 'getWorkers' });
+    const data = await jsonp({ action: 'getWorkers' });
     const workers = data.workers || [];
     const sel = document.getElementById('worker-select');
     sel.innerHTML = '<option value="">-- בחר שם --</option>';
@@ -460,20 +488,8 @@ async function loadWorkersDropdown() {
   } catch(e) { showToast('שגיאה בטעינת רשימת עובדים'); }
 }
 
-// ── API ──
-async function api(params) {
-  const url = API + '?' + new URLSearchParams(params);
-  const res = await fetch(url);
-  return res.json();
-}
-async function apiPost(body) {
-  const res = await fetch(API, { method: 'POST', body: JSON.stringify(body) });
-  return res.json();
-}
-
 // ── search-select ──
 const ssData = {};
-
 function openDropdown(fieldId) {
   renderDropdown(fieldId, document.getElementById(fieldId+'-input').value);
   document.getElementById(fieldId+'-dropdown').classList.add('open');
@@ -519,31 +535,27 @@ function selectOption(fieldId, value, desc) {
   document.getElementById(fieldId+'-input').value = displayVal;
   document.getElementById(fieldId).value = value;
   document.getElementById(fieldId+'-dropdown').classList.remove('open');
-
-  // הצג תיאור מתחת לשדה וורסיה (רק לטופס ver)
   if (fieldId === 'ver-cur') {
     const box = document.getElementById('ver-cur-desc');
     if (desc) { box.textContent = '📋 ' + desc; box.classList.add('visible'); }
-    else { box.classList.remove('visible'); }
+    else box.classList.remove('visible');
   }
   if (fieldId === 'ver-new') {
     const box = document.getElementById('ver-new-desc');
     if (desc) { box.textContent = '📋 ' + desc; box.classList.add('visible'); }
-    else { box.classList.remove('visible'); }
+    else box.classList.remove('visible');
   }
-
   if (fieldId === 'fix-mold') loadVersionsFor('fix', value);
   if (fieldId === 'ver-mold') loadVersionsFor('ver', value);
 }
 function setSSData(fieldId, items) { ssData[fieldId] = items; }
 
 const _cache = {};
-
 async function loadMolds() {
   try {
     let molds;
     if (_cache.molds) { molds = _cache.molds; }
-    else { const data = await api({ action: 'getMolds' }); molds = data.molds || []; _cache.molds = molds; }
+    else { const data = await jsonp({ action: 'getMolds' }); molds = data.molds || []; _cache.molds = molds; }
     allMolds = molds;
     setSSData('fix-mold', allMolds);
     setSSData('ver-mold', allMolds);
@@ -559,7 +571,6 @@ async function loadVersionsFor(form, mold) {
     document.getElementById(id).value = '';
     setSSData(id, []);
   });
-  // נקה תיאורים
   if (form === 'ver') {
     document.getElementById('ver-cur-desc').classList.remove('visible');
     document.getElementById('ver-new-desc').classList.remove('visible');
@@ -568,7 +579,7 @@ async function loadVersionsFor(form, mold) {
     let vers;
     const cacheKey = 'ver_' + mold;
     if (_cache[cacheKey]) { vers = _cache[cacheKey]; }
-    else { const data = await api({ action: 'getVersions', mold }); vers = data.versions || []; _cache[cacheKey] = vers; }
+    else { const data = await jsonp({ action: 'getVersions', mold }); vers = data.versions || []; _cache[cacheKey] = vers; }
     targets.forEach(id => {
       setSSData(id, vers);
       document.getElementById(id+'-input').disabled = false;
@@ -581,11 +592,13 @@ function initForm(form) {
   document.getElementById(form+'-date').value = nowStr();
   if (form === 'fix') {
     fixStatus = 'wait';
+    fixPhotoUrl = '';
     document.getElementById('fix-fault').value = '';
     document.getElementById('fix-notes').value = '';
     document.getElementById('fix-preview').style.display = 'none';
     document.getElementById('fix-photo-area').style.display = 'block';
     document.getElementById('fix-photo-clear').style.display = 'none';
+    document.getElementById('fix-photo-uploading').style.display = 'none';
     document.getElementById('fix-photo').value = '';
     document.getElementById('fix-mold-input').value = '';
     document.getElementById('fix-mold').value = '';
@@ -594,10 +607,12 @@ function initForm(form) {
     document.getElementById('fix-ver').value = '';
   } else {
     verStatus = 'wait';
+    verPhotoUrl = '';
     document.getElementById('ver-notes').value = '';
     document.getElementById('ver-preview').style.display = 'none';
     document.getElementById('ver-photo-area').style.display = 'block';
     document.getElementById('ver-photo-clear').style.display = 'none';
+    document.getElementById('ver-photo-uploading').style.display = 'none';
     document.getElementById('ver-photo').value = '';
     document.getElementById('ver-mold-input').value = '';
     document.getElementById('ver-mold').value = '';
@@ -625,6 +640,7 @@ function resetStatusBtns(form) {
   document.getElementById(form+'-s-done').className = 'status-btn';
 }
 
+// ── תמונות ──
 function takePhoto(form) {
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -632,47 +648,122 @@ function takePhoto(form) {
       .catch(() => document.getElementById(form+'-photo').click());
   } else { document.getElementById(form+'-photo').click(); }
 }
+
 function previewPhoto(form) {
   const file = document.getElementById(form+'-photo').files[0];
   if (!file) return;
+
+  // הצג תמונה מיידית
   const img = document.getElementById(form+'-preview');
   img.src = URL.createObjectURL(file);
   img.style.display = 'block';
   document.getElementById(form+'-photo-area').style.display = 'none';
-  document.getElementById(form+'-photo-clear').style.display = 'block';
+  document.getElementById(form+'-photo-uploading').style.display = 'block';
+  document.getElementById(form+'-photo-clear').style.display = 'none';
+
+  // העלה ל-Drive ברקע
+  const mold = document.getElementById(form+'-mold').value || 'כללי';
+  uploadPhotoToDrive(form, file, mold);
 }
+
+async function uploadPhotoToDrive(form, file, mold) {
+  try {
+    // המר לbase64
+    const base64 = await fileToBase64(file);
+    const res = await apiPost({
+      action: 'uploadPhoto',
+      base64: base64,
+      mimeType: file.type,
+      mold: mold
+    });
+
+    if (res.success) {
+      if (form === 'fix') fixPhotoUrl = res.url;
+      else verPhotoUrl = res.url;
+      document.getElementById(form+'-photo-uploading').style.display = 'none';
+      document.getElementById(form+'-photo-clear').style.display = 'block';
+      showToast('✅ תמונה הועלתה');
+    } else {
+      document.getElementById(form+'-photo-uploading').textContent = '⚠️ שגיאה בהעלאה';
+      document.getElementById(form+'-photo-clear').style.display = 'block';
+    }
+  } catch(e) {
+    document.getElementById(form+'-photo-uploading').textContent = '⚠️ שגיאה בהעלאה';
+    document.getElementById(form+'-photo-clear').style.display = 'block';
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    // כווץ את התמונה לפני שליחה
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX = 1200;
+        let w = img.width, h = img.height;
+        if (w > MAX || h > MAX) {
+          if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+          else { w = Math.round(w * MAX / h); h = MAX; }
+        }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        resolve(dataUrl.split(',')[1]);
+      };
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 function clearPhoto(form) {
   document.getElementById(form+'-photo').value = '';
   document.getElementById(form+'-preview').style.display = 'none';
   document.getElementById(form+'-preview').src = '';
   document.getElementById(form+'-photo-area').style.display = 'block';
   document.getElementById(form+'-photo-clear').style.display = 'none';
+  document.getElementById(form+'-photo-uploading').style.display = 'none';
+  document.getElementById(form+'-photo-uploading').textContent = '⏳ מעלה תמונה...';
+  if (form === 'fix') fixPhotoUrl = '';
+  else verPhotoUrl = '';
 }
 
+// ── שליחת טופס ──
 async function submitForm(form) {
   const btn = document.getElementById(form+'-submit-btn');
+
+  // בדוק שתמונה לא עדיין בהעלאה
+  const uploadingEl = document.getElementById(form+'-photo-uploading');
+  if (uploadingEl.style.display !== 'none' && uploadingEl.textContent.includes('מעלה')) {
+    showToast('אנא המתן לסיום העלאת התמונה');
+    return;
+  }
+
   if (form === 'fix') {
     const mold = document.getElementById('fix-mold').value;
-    const ver  = document.getElementById('fix-ver').value;
+    const ver = document.getElementById('fix-ver').value;
     const fault = document.getElementById('fix-fault').value.trim();
     if (!mold || !ver || !fault) { showToast('אנא מלא את כל השדות החובה *'); return; }
     btn.textContent = 'שולח...'; btn.disabled = true;
     try {
-      await apiPost({ action:'addReport', worker:currentWorker, type:'תיקון תבנית', mold, verCur:ver, fault, notes:document.getElementById('fix-notes').value, status: fixStatus==='wait'?'ממתין':'בוצע' });
+      await apiPost({ action:'addReport', worker:currentWorker, type:'תיקון תבנית', mold, verCur:ver, fault, notes:document.getElementById('fix-notes').value, photoUrl: fixPhotoUrl, status: fixStatus==='wait'?'ממתין':'בוצע' });
       showToast('✅ הדיווח נשלח בהצלחה!');
       setTimeout(() => goTo('screen-reports'), 800);
     } catch(e) { showToast('שגיאה בשליחה, נסה שוב'); }
     btn.textContent = 'שלח דיווח'; btn.disabled = false;
   } else {
     const mold = document.getElementById('ver-mold').value;
-    const cur  = document.getElementById('ver-cur').value;
-    const nv   = document.getElementById('ver-new').value;
+    const cur = document.getElementById('ver-cur').value;
+    const nv = document.getElementById('ver-new').value;
     const curDesc = document.getElementById('ver-cur-desc').textContent.replace('📋 ','');
     const newDesc = document.getElementById('ver-new-desc').textContent.replace('📋 ','');
     if (!mold || !cur || !nv) { showToast('אנא מלא את כל השדות החובה *'); return; }
     btn.textContent = 'שולח...'; btn.disabled = true;
     try {
-      await apiPost({ action:'addReport', worker:currentWorker, type:'החלפת וורסיה', mold, verCur:cur, desc1:curDesc, verNew:nv, desc2:newDesc, notes:document.getElementById('ver-notes').value, status: verStatus==='wait'?'ממתין':'בוצע' });
+      await apiPost({ action:'addReport', worker:currentWorker, type:'החלפת וורסיה', mold, verCur:cur, desc1:curDesc, verNew:nv, desc2:newDesc, notes:document.getElementById('ver-notes').value, photoUrl: verPhotoUrl, status: verStatus==='wait'?'ממתין':'בוצע' });
       showToast('✅ הדיווח נשלח בהצלחה!');
       setTimeout(() => goTo('screen-reports'), 800);
     } catch(e) { showToast('שגיאה בשליחה, נסה שוב'); }
@@ -680,10 +771,11 @@ async function submitForm(form) {
   }
 }
 
+// ── דיווחים ──
 async function loadReports() {
   document.getElementById('reports-list').innerHTML = '<div class="loader"><div class="spinner"></div>טוען דיווחים...</div>';
   try {
-    const data = await api({ action: 'getReports' });
+    const data = await jsonp({ action: 'getReports' });
     allReports = data.reports || [];
     renderReports();
   } catch(e) { document.getElementById('reports-list').innerHTML = '<div class="empty">שגיאה בטעינת דיווחים</div>'; }
@@ -702,7 +794,7 @@ function renderReports() {
         <div class="report-type ${r.type==='תיקון תבנית'?'fix':'ver'}">${r.type==='תיקון תבנית'?'🔧':'🔄'} ${r.type}</div>
         <span class="badge ${r.status==='ממתין'?'wait':'done'}">${r.status}</span>
       </div>
-      <div class="report-meta">${r.mold||''} | ${r.date||''} | ${r.email||''}</div>
+      <div class="report-meta">${r.mold||''} | ${r.date||''} | ${r.email||''}${r.photo?' 📷':''}</div>
     </div>`).join('');
 }
 
@@ -716,7 +808,11 @@ function filterReports(f, el) {
 function showDetail(idx) {
   const r = allReports[idx];
   if (!r) return;
+  const photoHtml = r.photo
+    ? `<img src="${r.photo}" class="detail-photo" onclick="window.open('${r.photo}','_blank')" style="cursor:zoom-in">`
+    : '';
   document.getElementById('detail-content').innerHTML = `
+    ${photoHtml}
     <div class="detail-card">
       <div class="detail-row"><span class="dlabel">סוג משימה</span><span class="dvalue">${r.type}</span></div>
       <div class="detail-row"><span class="dlabel">תאריך</span><span class="dvalue">${r.date}</span></div>
@@ -735,11 +831,12 @@ function showDetail(idx) {
 async function toggleStatus(idx) {
   const r = allReports[idx];
   try {
-    const res = await api({ action:'toggleStatus', id:r.id });
+    const res = await jsonp({ action:'toggleStatus', id:r.id });
     if (res.success) { r.status = res.newStatus; showDetail(idx); showToast('סטטוס עודכן בהצלחה'); }
   } catch(e) { showToast('שגיאה בעדכון סטטוס'); }
 }
 
+// ── חיפוש ──
 let searchTimer;
 function doSearch() {
   clearTimeout(searchTimer);
@@ -748,7 +845,7 @@ function doSearch() {
   document.getElementById('search-results').innerHTML = '<div class="loader"><div class="spinner"></div>מחפש...</div>';
   searchTimer = setTimeout(async () => {
     try {
-      const data = await api({ action:'search', q });
+      const data = await jsonp({ action:'search', q });
       const products = data.products || [];
       if (!products.length) { document.getElementById('search-results').innerHTML = '<div class="empty"><span class="icon">😕</span>לא נמצאו תוצאות</div>'; return; }
       document.getElementById('search-results').innerHTML = products.map(p => `
@@ -760,16 +857,15 @@ function doSearch() {
   }, 500);
 }
 
-// ── DASHBOARD ──
+// ── דשבורד ──
 async function loadDashboard() {
   document.getElementById('dash-cols').innerHTML = '<div class="loader"><div class="spinner"></div>טוען...</div>';
   try {
-    // טען גם דיווחים אם עדיין ריק
     if (!allReports.length) {
-      const rep = await api({ action: 'getReports' });
+      const rep = await jsonp({ action: 'getReports' });
       allReports = rep.reports || [];
     }
-    const data = await api({ action: 'getDashboard' });
+    const data = await jsonp({ action: 'getDashboard' });
     dashData = { fix: data.fix || [], ver: data.ver || [] };
     renderDashboard();
   } catch(e) {
@@ -780,17 +876,12 @@ async function loadDashboard() {
 function renderDashboard() {
   const fixItems = dashData.fix;
   const verItems = dashData.ver;
-
   function itemHTML(item, type, idx, total) {
-    const verLine = type === 'ver' && item.verNew
-      ? `${item.verCur} ← ${item.verNew}`
-      : item.verCur || '';
+    const verLine = type === 'ver' && item.verNew ? `${item.verCur} ← ${item.verNew}` : item.verCur || '';
     const reportIdx = allReports.findIndex(r => r.id === item.id);
-    const clickHandler = reportIdx >= 0 
-      ? `onclick="showDetail(${reportIdx})"` 
-      : '';
+    const clickHandler = reportIdx >= 0 ? `onclick="showDetail(${reportIdx})"` : '';
     return `
-      <div class="dash-item" id="dash-item-${type}-${idx}" style="cursor:${reportIdx>=0?'pointer':'default'}">
+      <div class="dash-item" style="cursor:${reportIdx>=0?'pointer':'default'}">
         <div class="dash-item-info" ${clickHandler}>
           <div class="dash-item-mold">תבנית ${item.mold}</div>
           ${verLine ? `<div class="dash-item-ver">${verLine}</div>` : ''}
@@ -802,15 +893,8 @@ function renderDashboard() {
         </div>
       </div>`;
   }
-
-  const fixHTML = fixItems.length
-    ? fixItems.map((it,i) => itemHTML(it,'fix',i,fixItems.length)).join('')
-    : '<div class="dash-empty">אין תיקונים פתוחים ✅</div>';
-
-  const verHTML = verItems.length
-    ? verItems.map((it,i) => itemHTML(it,'ver',i,verItems.length)).join('')
-    : '<div class="dash-empty">אין החלפות פתוחות ✅</div>';
-
+  const fixHTML = fixItems.length ? fixItems.map((it,i) => itemHTML(it,'fix',i,fixItems.length)).join('') : '<div class="dash-empty">אין תיקונים פתוחים ✅</div>';
+  const verHTML = verItems.length ? verItems.map((it,i) => itemHTML(it,'ver',i,verItems.length)).join('') : '<div class="dash-empty">אין החלפות פתוחות ✅</div>';
   document.getElementById('dash-cols').innerHTML = `
     <div class="dash-col">
       <div class="dash-col-title fix-title">🔧 תיקונים <span style="margin-right:auto;background:rgba(0,0,0,0.1);border-radius:10px;padding:1px 8px;font-size:12px">${fixItems.length}</span></div>
@@ -826,16 +910,10 @@ async function moveItem(type, idx, dir) {
   const arr = dashData[type];
   const newIdx = idx + dir;
   if (newIdx < 0 || newIdx >= arr.length) return;
-  // swap
   [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
   renderDashboard();
-  // שמור ב-Sheets
   try {
-    await apiPost({
-      action: 'saveDashboardOrder',
-      fix: dashData.fix.map(it => it.id),
-      ver: dashData.ver.map(it => it.id),
-    });
+    await apiPost({ action: 'saveDashboardOrder', fix: dashData.fix.map(it => it.id), ver: dashData.ver.map(it => it.id) });
   } catch(e) { showToast('שגיאה בשמירת סדר'); }
 }
 
@@ -844,52 +922,16 @@ function showToast(msg) {
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
-</script>
 
-<script>
-autoLogin();
-
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); deferredPrompt = e;
-  setTimeout(showInstallBanner, 2000);
-});
-
-function showInstallBanner() {
-  if (!deferredPrompt) return;
-  const banner = document.createElement('div');
-  banner.id = 'install-banner';
-  banner.style.cssText = 'position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #D85A30;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:999;max-width:340px;width:90%';
-  banner.innerHTML = `
-    <img src="${document.querySelector('#app-logo-lg')?.src||''}" style="height:36px;object-fit:contain">
-    <div style="flex:1;font-size:13px;color:#1a1a1a">התקן את האפליקציה על המסך הבית</div>
-    <button onclick="installApp()" style="background:#D85A30;color:#fff;border:none;border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer;white-space:nowrap">התקן</button>
-    <button onclick="document.getElementById('install-banner').remove()" style="background:none;border:none;cursor:pointer;color:#666;font-size:18px;padding:0 4px">×</button>`;
-  document.body.appendChild(banner);
-}
-
-async function installApp() {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  const banner = document.getElementById('install-banner');
-  if (banner) banner.remove();
-}
-
-if ('serviceWorker' in navigator) {
-  const swCode = `const CACHE='plasfit-v1';self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['/'))));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
-  const blob = new Blob([swCode],{type:'application/javascript'});
-  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
-}
-</script>
-<script>
+// ── לוגו ──
 (function(){
   const src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAi8AAACnCAIAAABWyiuPAAAQAElEQVR4Aey9B6BkRZU/fE7Vvd0vzJscGRhgSANDliSCSFKCade4Rgzr6n/ddVdFQUEwAYY1gAEVFWUVlCAZZkgTyEwgZ5ic88vdfavO9zt1u/v1e69ffjMM+1H8bt1Tp06dOudUuvf2GzXyRnojAm9E4I0IvBGBNyLwWkfA0BvpjQi8EYE3IvBGBN6IwGsdgTdOo9d6BN7of3tH4A39b0TgjQi8HiLwxmn0ehilN2x8IwJvROCNCPxfj8Abp9H/9RF+w783IvBGBP6vR+D/hn9vnEb/N8bxDS/eiMAbEXgjAq/vCLxxGr2+x+8N69+IwBsR2BkikP492s5gyWtogwyt72E9jdQWXOIJIFBF20ClIGUGUoS6oqOyLFWNFZp3SPRaTLvop3BJrGxZT72nAloL/T4tgUqd7WJPYCpPJ6u67MDxoa1mhOZgAJBBDhuKhBYGdsEQbYD2AJSHHpVDhA61I/AHBoI9/Qb6rwpVgvBUoopOlVK2XsHIonzghyxwU38qyJSxw3NYVxHVYF/IEAG9o7qMRMiB3Q1lT/tDlLWlwuUiiJQzoBytUqStQOu0hOGChZsGFzzQ6iMoFdtOIU57KyoPhVK3uloQNFhVhhZVBndArdJSsXGQB7vagggqSpoI/ibaQBlBB5YI7kGuQy+YXkXTEHhUaIDAES8pDzeQkBMGAyXnUAftKqzyWHeo1W6gW8BR6FXqDe6mZKkSpbQRCEBlQ3PQOy/gNBzR6ZKQ9xohhAM35cADGA73S24Eslo2XKcR+hZhdMckzApimCdCMAT8FETpnYm7o6OSuESDEtVIveSQ6QlpLz3V9sBnSptxyYiuBEMA9pDeyYScmSlNRWvhuCf2KQ8hALSGBQH3uBAp0vikApDDBIZMWhxczjBIWwruQuQxDFrUCx3CTvC3J9B/VRA6RXgqAU5XqJTycMF4hBfmKwgkkYaSHQGEWEFGQa9hYhip3TORkjAKownzuEDklEllfyMmyx3FMp+Y+o8urcpFEP1XUpZEqxQpB7QlTcxsqGgW3DLBSWSAVm+Pi8kDROhC0LXHrmESATgBn1FGgIU9IbIaX0iDEQASoVYEw4S5RxA5hSpIPDtP5MmKatGFivMEXRMlYAuRMOAh5ljAZ0JHBRKHvcwxeN66xLh2KTS61nWucaXburqwdX3S1ugk561giRsRFp0QHvEkA5VE6FNIeyQKxjByESF1DcYJ2GijPSbETgEBENrQB6mdNocXhP3FkLdeIh9IBE7ZSdjlBM6KnlIMH+BoT0CkeqrqDx8x9ESJUOLJJSIJkfNKsnOEYWEEmPIJNbUVtjS2b97WVsamrW2btrRt2tq6aYti45aWjZuL2LCpuQKtGza2rgc2tKwLWLuhZe36Itaua16zrmn12uY1a5tXr2letaYJWL26cdXqbcDKVY0rVzUBK1Y2dkbTihXdsLJpRResalwRsFL1NK5Y2bh85VZg2cotAZuXrdi6bOXWpSu3vrIK2PLyiq1LlzcuX75l9aoN+Vy7eIyEI68zDhFxPucRE0euQIWcl4KIczpeAhHE0JMW+hPz6jJQgcEgCbNApK01v3rdtmUrty1f2Qgvlq1qWg7vunvdhbOyeUUnNKFtinIQVkBhB7atCDFBvmLF1uUrtizXvDuxbfmKntC4bEXj8pWNK9c2b9za3pKXBAuZ2AnmkXOaCZY16XLUiRUKIVZCr2nCng1bhMQLkmMBMKLkMMzb2to3bG5euUrjsGzlxmUrNy3XsGxb3iUIOjoYoA6sWIl4VsOKxhXAyqbi6KyoGKYuI9ifouqBKiwNLBCdHstXNS5f3bhsdeNSjOyqxqXLN69ctznnvK5qjbIQfBza/FQ1Va6g2SOGCq8jjXFl8o5c4gENLxZSPu9bE9dI+a3cutm3bE4aNySbVycbVxTWL03WLnHrXkjWAM8na6riBbfmFbfmVbfmxWTtS379Etm4gratpUKLiHisGM/infftkuTRYUE8kFCSsMecY584afVU8N74xFChPdm6suWlh7Y9eO2mO36z/oafbf77z7Zd/4vm2X/ML7zJrVjITWvZ5wtCQOIIrnhxnlEqiCZGxoI5jBpJhApecr7gC01J05r8+pdzK5/OL3+isPxJIFn2VLL0aQWIZU8mOyeWPuWWPV1Y9kR+5ZO5Nc8UNr7sG9dIss1zguNAnAgOgKTd+0IiAg48rzIRAmuIp5HOUq/TFIuTEWIhJ4yF6Sni5iRZumbTQ4tfvfWuJ/509SO/+sO8S38397IrkM/72W/mKi6f97PLH/jp5ff/zy/n/c8v5v3oF3N+/Ms5/4P8sjk/+vm9P/jZPT/4GfL7LvnZvZf85O6Lf3L3Rf8z+/v/c9f3fnzXd380+zs/nPW9H2vxuz+663s/nP1d4AezvvuDWd+55M4LLrnjgovvuPDiO7598R0XXgLceeElsysw68JL7rzwB7O7oixz8ewLFLO+fVERF1w064KL7oTOb12s+YUX337BxbcjvxBFVF1854UXQ+esb19y13e/f8+F371umr/P27Itl1Di8CiAuY4nA8Fkz3nyG7fl7p337Ox7Fm3a1EwaN2RYfpifQixhRJCVCdD9QrFBmOLQ5T0vWPTKJT+49jsX3fydi2d996LZ373onm9fcveFP+jmdZlzCVyY/e2LAy6aVSRQBB1wATxFEAK+1ZHPuuD7d1zw/dsvQH7xHRcgIBff8a2Lb9dAYRQUYTgwKFo164KLgTs1Dxou+P6dF1yEYbrzOxfd9f1L7v7Fbx647qbFDy5Ysmp9c8ETJpLoXHYk3sMr3bgQI70JPNVnxn4FZ3sICbEXvDqwCNQ7wbO8oaZWfv7lptn3vHLV3xb/9Ffzv/PDu7510R3fQnAuuu1bF992Qdcg3Km1ELjodsiARig0jIjkRahCZBRpqC+4+M4wIohemJyXKHHhxbMV5RHsP3HxXRdefBcUXngRNNz1bcz8H9x+wQ9uvvCi27/3g9nfu/i2S378zay75+cKhVySI0H84SQAT4cdLOVEQjq8bLzxwp49GezSm5Itr/olj8uT9/uHbm+de23jPX9uvv3yppsv3fqPn2659cebr7lk698uafzrxQGXNF5dFai9qPkv32v+y3eb//L9ZhB/+0Hj7Vc0PXZHfuVz3LyVKFfggiMvekA4gkkkxqdvT4I5WGDOcd5Iu2ne0Pbiw2vvvmbFdZdv+sdvk3uv5Ufu8IvvTBbc2Dz7d9v++oNtf/2fxnnX5ta84H2rx97rMY8JnolmuDB7kUckUUK2gFcfaYvaNvDyxc2P3bLxjt+t+/uPN/31B5uvvmTT1RdvDthyzfe3Xv39LTszrvnelmu+s+Wv39l81Xc2/e93Nv3toi13/qF54b14SuB8u2NKGFFAUAlDinNCdPFWn0hDPI2g3JIoWMiQM3iOYbs1RwteXPvXmx/+0a9u+uZFfzn/4ht+8uu7/3j14j9f++Sfr338z9cuvuq6x/9ywxN/vemJv/7j8atvevzqm5+45uYn/n7LU9fe8vS1tz5z3e3P3nDn8zfOeuHG2c/dOPvJG+968qZ7nr75nmduuefZ2+577o65L905/6VZ9798x7yXbp/74qz7FbMfeGn2gy/d9eBLdz/0yn0PL5nz6DLFY6/OeezlOY+9NHfBy3MXvFKBV+cu6IKK2kWvzF30yrxFr85duCTFvEDMW7Bs/oJl8xYum79w+f2Ll89ftGL+40vuf3zJA4uXPbBw+YMLVz60aOWDC19eta55z332ztZnHOY354U/ODB7G5narS3yjzsXnX/x3y69/OZXlm3gOCPsBMcVYRQABDMdpDKRFvvOQwNH5CHKZBJHz72y7o45z89fsHruwqVzFr40Z+GLwf1Xuzmecl6Zs/BVeD0XYsCil4vEwlfSCCCfhyAsWDJvwZK5FTmK8xZpKOYhGgtX3L9wxXxg0QoNzqKV8zuwbP5iYOn8xYASDyixZP7iV+9fvOT+RUvmLXzx7gefuer6+7//k+u/9f2//eb3993/8LItjd5EsbEJli0msqHI6CcvfGAJqxsTjl6zhIBzOnDMGD08dixZseH6mxb98H9whNz401/ffc3NT9376Nr5izbev3jD/EVr5i9eNX8RHAcQAQDE8vsfX3H/4uX3L14xf/FyrV20bB6weNncBUvnLViKfO6CZSkxb+HSuYuWzF346rxFLwa8jHzuohfnLnpp7oJ0BAeUvzL3sVfmPLYE+uc8unTOo8vmPvbqfY+8OH/hiw889sIDjz6xtbl53/32MRG+MRIh2Mi2G0T3fJ38LHglwmbtvXFs8DayObf0icZHb9l8y+82/+2yrX+9dPPVv950w++23Pbn5nuuLtz/D3rstmjx3dmn5mSenmefeSh69mEg89wj8XOPIAcqiej5B6MXH4ifR9VD9um5snhW+9y/b7j+snV//0nrg9fS5hcSbnU2SwyXxRpjHdm8ibA4DQ4n7KI12ENN07K2xTdtuOXX+bnXjVn14uS2lgntMiYf1wrVkhuTFMY1bsu8uHjb7L9tvP1P8sKDNW0bLZY/fMEkCZukThnC1iw4buFqJK22aXlu8d1bbv7jpht+W7jv77VP3jPipYfrX3m85tWnsq88mXn18XjJ4mjpogj5ksejnRNLF8VLFtW8/FT9S880vPB4zeP3t9/z93XX/3LTzb/2T86K2pZLFtGsIWet95HHZ0/paTZhHvRU1TsfGgHICG5CnvEM5RND0YpVTdfd+Nj3f3zzzy+de9c9a1auzRT8KFszytTU2mzWZJDX2WwtZ7IcZTgTcSZja7K2pga5qckGZLgmY2ozpqbG1NRHNSOi7AgbCJutt5k6ExdhM/WgbbbGZGpMthaw2VqrHaEhFNZGWQW6oDguIUMxUC6mBDhZirOsqDFxjRKZLBoq4ozJZECYbIbjGoprOKrlGHSGophtbKOMMRnmwt4zsl/80mmnvn1mbW0+4pwI3pAKRAUm29hEN9628Iq/zFnfUuMy43OYneSJ8syOsJ8pmIaQ0BhQBVjUzIm1VFtH2TofZSWToUxMcS/IcByQqeFOUK85U8zhfhVkNDgG+jMRZTCaEcdxNwTlcUdO2iprslnWIAcLMfS1DZwZt2a9vfb6J3/ww9uu+uv9S1Zu8WwEH9DxlINo6UzGdCNiwZSjHZ1C18VORXdpgU2Y99ETz6y/9Nd3/vLyWQ8vXNVSwFQcgUnIUWSyJWRsMcIdQYghEAIVAgi+xiTQ2YzpBAQqHQKEKwwQZmA6THGW4nhA4DjiDKyKdcgwe+MMYRc2I+N4TBRlbdR22BFT//u/PnzU4QfAZGsshR20lNOwJ8QRQXSEZYC3EZx9bTa3qbDi2a1zb91w3R8bb/ijmX9T3SsP1217tcFtHOubx0vbaO8anBvhXJ1IPVGWxOB9KhITEVsxVpADlYSxRkyWFBkysbVcx+1jc2vqXprXOuvP2+79R7xpNTkWsiTI4wb3twAAEABJREFUBfqYrIdVjIPDskRRa3PbY3NaZl1Xt/SpiYUtDb4pi1clzluTq3FtNYX2mBKJCDaMzG+WxbM333Zl+0uL2LcRebxdieAHJSYcQ5Kgn4Qwl3J2y+qmB2evv/M69+zjY5q2jvW+XhVkIo6y8IslZonYR+wyJAEUctBDIdAWGKKSiuYiMVFkjLWGIuaYak3bmMZlZuGt2276dev9t0Tb1nmEUgwRiSSIKIiqUImqFf1gIqAA4lpw0oaQk8k+//KGK66857dX3PfUU1vEjY5obEQjrWQiIuMLhhL8vmcwYchGYiPN48hHCoy3xNZHxluLU9RZozDGARZMBZ5aPGhME7a+DGPEYhJGmI1ijRh2ZcTsajipsa4m8tlOAKcrspHLWiDJ2ADjogDVCQJdwLzIx7GviVxNDCSQz1gtRtzedsCeo//tkyed/NZ9azM+JsiMNEkt9ionrrHV3XzH4iv/Mn9jI3ubcbAXc54SpjyRY401BkLvXFz8yhrQxWSEEGYoEI8o27znNuzjlmKbjIhcfeTgIKyqBrjgNUomqQnIhhx0bJytQGQkshVAsYwyP8JQ+igdxJ5y4zIGoXboNGscYlhvXT37SDB8psbGo1eubv/z1fN+fcXsJ57b0l7IJtgfvJBHrIQ0RMIEgnZUQl84/9CbElhTivDim0v40YUrfvXbu+6e+3JLIWvi2ogwn7NWJ6q3DuAQhGoB0SgFPggA8010ypUjaQUTRQNuXIwoAbZQo8DES2psQOSqDWgF0yLIvibMUpVMi8bVWslGYmOKYspm3IhMYXScN0cfMv2L//ruNx08LWaKmTM2NtigNeDwfXvAMyVErsDcztiqcm7Tkm0L7th48+9aZ11V99LDE9vWjjUtdTYXS95KoiA8wOWJkRfwi4SE5jg1iBwRONVBHvy8Mzln84Tf2QmZx7jUS6Zu66ZtD97T/PDcqHmTNYTNyREWqUkynLA4toZNXGguvLio8b47atavqhdjxDJxAUdN5Ftjn49NEtmCNXlDeCo3UhhBbbL0mY3z78yvfZlczggiyEI46HSbZBLPBde2cdujc5rvvblu0yt1pslwG0KBKjLeM35nco69AISJByIR3knB7ImcM20uaibbzpzLUD6El9Hi61Yvbbnr1tZF93NuM1vOW263gkD0NJNMTxV98ZnwOK9RhnZsDdaZzBMvrLns97fcMvvx1vaa2I4QkxODNwPYatlnjY+tN9bjFBHryQoZESO+CkgMoLUQgH7PKqZ0EE4MVcLpYAtxAGi4pNAi2mL/coa8oaCzIwcHABM50J2AeyXAVHgrHJTDDGcFnQLYPrHZY4Zt3W969nOffOvb3jojjsBnlghdWWZLpqmdb7hzwe//Or/TSBge3cBdqIOCISdK4OuNtYIpbGhbssDs3RhroAkz5m40M+sA1oKFj7GgJNhQS1YwE1r8YBwBJ4k4SKGfVoRgfOaZfqDKDKJbGzYXAbqURTD2Wn2dH4WNqxOgX7xRNhq15eFQBZJ6FRm/XpH3TiAtKfS+bX3L4I5w1tUNgUxqmJmMC12nUagJ0oCGK4VaRt53U2fOC+4+xFTaI6pQUEoZpC7VQjpHjA3JJKaR1m3HQJWJ3APMN2q37fNdS7Y3BdVxCQLBnGgGKGFCbhJqAXe/G2mLegqEE0i+KjMVgEfHUmPovfW+NxomlaFpTpLGAQKlUSU6Ah5IA53VwGFRoJbIJwQSfqXSJMk3BXQB2YyOd2hKE4+AV0y5g4BKuixpJQ4f9v2TZO3a3Y/K5l7UpUkCJRFQO6J02Tr8kkj5kkE7qSdyQpA4d7bJxSwNn9xCCl8qgELdEtRJsKTh/MhVz2gFBTSFbIMbWVCJiWTRpSXhVJbMkGm8j1H56gqPUFBwjgxVKJeS2IWiCt9vFv9NKM6RiNYbL3LFjG5h/IFwm+fkdXCERPkrFHXvGcMkLRLGqF7nSKTRuNc5FGFlYR0T0vEacmYBxOW2fBGIhQJqgLHbMD7FnRD5lUJw0LzJgScSHGMh7hPCIHyEZfhWjOMzj5V+OqbcbDNrSHjBsqgb3gDEMjJL8r0IA1x7j/IlFH+X1oj0xRh0t4J6FQFi9p6uiiGEYiIELGIVRx+QoETd9GEw6qGLFqcQCkJMpjWxQ0AhZQ2kNDc+4MJOOZIEbGEiDvCzE2BuUocR4hWJJHJy4GkjLjgEMqpNBkGaByNlcmqQJpuicCKq1lJpaSuHdXAGc16BSVYRmCIaMqUmHC4SMRQTa4+nw3FMEGFqjRZ1r7xHNE4kQ+BuqxT6LUG5YBCLCgtWagn4RVXq0d6Yk6t5U8bQpn9YJVzJZQWVS1kXoKJUZ2qrYqYZoGoqFHIY3BVfM6ZNRQ84B5cVE9W7wjERE9MoCsYGPjGWLFKLFZ1ePE2Gy1hBIBkMJBHCHoJGRVYdlOkQS2sJqhVkVbF4HI5BTlVlxOgc+hJUhJK0VQbR6XN3bMSG8KGrNxOmPj6NB8C2sH+5AvGRDikmLwDiwajRi15vEMwFG5EEqCTkQZ5Ij1KItBhBU/E7RGLVGQcaOgr1MkgIa7KqiIHrVHRW3JiyiIgBrUEPa4C0S0E7JCAqE+6mDCGr3Xrax3JJWKLYtygUYMqR9PoJH9oMakCBAnZDJiOkGiQEOJTDJgxSmogajU4MJQSlcv0jJGk/bGfxcEr1BPQKFD9zKTqLrNsv8ZfV4MtMmBY1JVD9t3pPRF10AVgqH6jJFM0ACBjJeN0cEOaWlWIHIAFZRBFgLFkIgJPSJlJqLLrPCiiFkB1BSiCfhiiS5CCDUF4MgJIBINbRpyKKCQjNgApnF8teMv9T8KgaAMwVNSIBBOzC4yXiAExuTQkU3DCI1IMz6VaVImBkUCLPB56BraBkH2sFUSqBm8MuS7GYqJAjBFUh1oC0vZqkZM5KGpCH1AGVrFO0U0Xpk0gp5aNJWzMYJGOqFVcqnSXCASEQ9C2CGKL1fCt/BEmMzBhT0N7eKe4pNEWdYFl7u5gQEuCSJq5DWj+ywO6oKQxOFuHMzS6GqCOGklABoNhQMHUFG0ZCDKCTYJZrD0qQA4MlI5ShSVfYFJMMUNJT9F8GFZxEVIqRj2t0UVRUoMHSRpqUSMiJBVF80A1BOFJlUj1zQPFvMcpOK4lZLiWqaoBvHqRECJISSdCT9bBF+FcW7ERK8ywVRIVEqZqRsUGExTqjCwqFNlJPb5/3oeXWNqkdoHzxKb0CbcCByWSmhKKCpV7I1AlBIUzXFmEDpKnlSrUG3mIQEloH+hJM6VWP1VCMGgY5LJaS1B0pBHgLtLVHAJB/nI7fFCAVqEFiOTSAIcOYNqijf/1F+FbSlJBVeRBDolmFo6M65RKWF+Qf1u60FnRm+5TE7SkRBuoYOCoN2hZmIiAHWVkYlBRrxJwRRRwYT0VRXcY5jIpF2oqmfUBZI3ywD3KNbROoYajxl8y0SHbZN8ygBe1EgBnVyStXqAqhZVYI8ERkVxGKJMdNWmh7yFl9EEDZ7+gCEpBJMGWHJAdKEsaaCzAkBNhFI9Iobk3BODdSiCrQJkiDohhGAOyEn/3lmIBUPZuInbNXaJFlJcXNXLPQhR2k1eoGXIiCsISV5UHMRqL/nZRUoNIOhBdNRhPSOxQJ7tAsMX5Ib5wKGEMx6gDd2rVMgWGmCAuHVUOQHhKQAGkrVUz6gRDcFbHrCVSKN9MKA1dXpFVJSHDcKcxhKN0h5sYTQ0MAEMFkAyBByikKmUVBETCqzlhWAHyAUoYm0G1tJ0h4GJT3mMYy0BoK4rZhGU9miFVICTYCnBJmJhJFG+qcXNzRxLOVByBG9KcFO3MWLtAmtpz72Y1OvBqtDHb7WZUAdBV9iAJqUPOK18k8k4JCGEt+lPnRgTx/GEMIIKFsBnWUGNtfOVlPQXgFUOoNVXoSRLgUFamaI9c8AWkOE5lohCNMYhMCBJQHCkgAAB27SURBVNCGJAmIhwBKiV3KrYmMIUMq9n6iuglWBMlWHw2OYMXAV/A1RFsH0wDJcJRAbmUDQfPuZP2xGQmHvEnF+agKVhSFgb50HhFYzSOqr7MZrgkoBCQpsMUBQFAI2VW14Jh4CRE9aTYlsRXcjLAYR4cNlrSDoheF6IomLoFBWYSYEJVcCNuFNkfRQ5oG0Z1XtgqJbqxhgC5Ggqy2hNUw0lXWVAYPHhG2lmqGN0HMRY+7EHjVBBQkpJsQD0Pxh3MSAd+ATqRBiEBqgpwj7sj7gMb5oClwYJ0GJwQnNUFjJuQsLJKmCe5TmFsMd03Y+CiQIoFLNuCNZiRmjZ+bJrMZg4IAIMxoBOi4xCl9ANH1fzORTkGXH+IKGMjHvVrMgHKGqQIGjXCRijYZ5KHBpICVBBLSWjJJT0Sav0vVPi0j+p8K9zblMCVqlMqY6Ng4l3MJJYgHAZjGJHYKAJGdYd3CEBgGJ30wEoRUijdX4kn00nAqjCiCSSfVjZD7Y4Qa6ikr8oAVZiibMWbgEW5Rq1B2ZzKjp6tVCqJvHFKkJBUFGoiHOCAnkbQQpYJVBBbzwSlxIJKxRlMxJREMgDVMx4v4ZyFNAtjW1TBXKjILANDqIYKKoKzxgb2I0M5B7EyIHEU4g4ADEGGHq58MxUBzK1BmPdBfDqQv18BM7YBdJpFLDdvALBqbM9RTrHY8INHHgDUxT1kDMgRJNb3K0TBjh1nAGKmIqKrRKjVl0CASXq45hQmSiDBmpOoJIOgqhBq2JQ0F7cMkMRoirR+tFMCt5pQhT0RCaLQhJ5CtAjSJKlPAhEMJOyAAP2GENrNpHRBvbA2bIaIiY1CoA/kW1pjHaR7AMBqJLBLR2OKmOiTwHJgpFWsZ1cRQwNoAIjEhsCVBjL1QVSAGqDlTkArHZh+GqFXbMqHWxALJlKnJhDkiEIxrLlmNYGpIENTuFt10BjA0g9hxT5AVQoDAXcBrN1LKCnXYaqJO3fgVFvVlpCCrViGgWLFRASYkxwLX3hf5r6j2J2xLHIbZ7ot70HRZOgI4ANlFpjsxvkKagHZMBvPVq+ghJrKGsEkVyD5X9GQRI2AGqSFQCHNv4KA4MeggmDfxq+iuWaJj62FqCjZ7GmZbfFN+wG9Eq7IHuZgJLCL+4c3fBDJK6SuJCPYjWB7g2w9IBlOJMU0jGb0V4GfEJJHg8VEdBX7LCNPSShQiLQ6IQ/R3BFTLM9UKYuQhJSoiBWjG0EYkM3KiXjcyGKqJSIlFRJCSgYKBKL0Mg6zGXySDaXN6m1VcXjpSb4MbBnJYSdKr3OD0bFiFyWUaDcmKdwwL2K+BM7YZGSE9oAJoAXYAFE9jHqVMzr3ZhkJfEVkjAY1oVjFjpKYmNqQSJBhCDhJwzpQ8i2B0FUACXdEWxmG2gRDASghSSq0Y/jSWcJBFPKJ4cXVZNvt9xEeOV1PgXCmCFRvUarST5JikWCgRoEJhyRFkbHl3Fx1yA1VxTMjdBVGRvWqWRUGHB1OokyV1e6ogChUPvJtAEBv6bGjFTVmS2HYSCSJw6CSS0VVBScB0I3oihGAR1IMnIQXy6cFo5sISh7o7IcJlhsHSnRtbJCPOcNEYAIX0ry/X+iNIkCECGT7V5t2AuqRaS5lR3pHbE9GXJwomaqjGRMCbfThW3VSwqNQGoCjGWvlUvbENqJWQZHOsVqNIBAlEtCSP1KKBdIAXmJyGQOAFpOu1EGAUZkzAJAXEBFmZFqgFkYilpVOkIGUOLIjJFZSaMvAGOBFcuSGJHIQYd5JfFjCDlM7+0E5gY9wCgQV1BFNR8gFXExW+pY1AMTGxSOHhkjhFpJM3HnAVFaxijZqCCQ0I1UF6gI1g+Y8pFfSk0FNzVijbC6UADJVNMjGJgAdLXCbQWVuIBEjBbqYwKHHHwwF3R3Q1bnphtlBXCgpNNRh5lCkWcgFiHioAgxpd42B39mIWRBIwkmW3D0PzKmJ6yM2JtB1T/JOu3hWIStBkMcuIiHMxaO8gIzSBMNkXMuhhREiGTCCROXIuIYzKdGALzH5K+R0HVAhDMC/ANx4QkqJl3QNiK5qrgL/PpN4bKAj0MAQY4rkB5yyNi6OtBVRKvA2GjSvGELiIggCGMFWnDv+cBR1vL1bnJ0a9kbHGcRBb3/UFBT1FdNjHDqU6cNW3TBInGwVFbcIIhBtbMCIKKT+XUVR+AIuJx8D0RHFNQi0eTMFB3lgJWlBaSCkIUAtgmAFI7T5YFcPBQJxYFXINpYF6V5YfFWJE3/RgGqVkiCvxWDxHhagTuBhfVfHyqSknHEUcaMJvqG0DkU4oDAHgF9x4e8GNxBlnCJdF5GmAoBpkqQWCEDsBr36K4KCZRI4BdkiEJPQKfHSCCFJEJXNiiSTKDJUSCkiBEQW9k7AVgMXKCFJAjWMQ0kiuaJH1tKknwUKClCYqpCSwAhFDRBjCVGAGIUZBJsMpKnzC7bHOIkIjqyIhpFUqg4pFQ2B2MdMqmCNzSIaAT0D6QLcv4AMpRVHiBoZ81y1LkGYvVFarqjqg3xJaR3gkKfbiBFGYBEYNJHiVSxRFMSLqpJSQCGoqO5C4yHVICQZ3aq8m8RDvpY0mFSIcrgkq1YXBGZQ9K7kMiOhUBDzUGCAiyqHJXYkyijV1g8VvyCJkBFGU+K4oA3TBsZJYNwNLDFoFRmcKLaFnOmxICFJGBWkFmVbFUfVWJakqCOGpDLRTXRQJUYqNOI8RQoOoOCq9oHxhNLN7FgOMEkgYqkHBX6JqnGrqDaC0Ah3JgQEVV5JJGqsLiJFMC2o+pJ47ICvW/ghqCVQXHCqRNZFMKrMkMZpqRCXGZMvV6LRWZPW+9PVjR7YkLNxOFGwRKvACYMlggVW0k+JROqAJfJMO3hIuAQlB1RnMFn3MJijWRDLR4UIrJFkKxaSqqJQSkCKaIQEqzWMw/B8pxajJB8iBhWMoAO3hCBVGgJ0+hsCkRqKWAZhRkPxO6kLvGaIHYoW7YFnlIqxCuE2T1UuMH5KZJJoTWjqT5ATaEFBYJuBkaSNbqipD7eNiIIOY1PaSBdaRkiViDNkCRNSqJk/SAimM8DRPF6GJJ0zyGt0IcYzs3+GRVXAOKUEFbPQEJ7hzqPXG5AxiBqIrBYVROBZxLhB+KBRDRAhJCEFq3Y7L4bsSpvAJgBEHMqASApBsqJJjQSoKK0eTWdSLLZhXRBsBq8pCH0JJiINlOzlEiExqAgLQoL7a1VaV7CCeaBaIQJnpqKFI8b8OtCqeRPW4CCkAYNVnRBQgkpuS0SEKkHDSIMXISCNlQUQlAOw5RMBxKHRQVEfApUVWsELwUAcISFjEOSmJopxJFIlFJIioNUJEJEHMFQ6rABTxPREBVRJlYgaGAnEBfHCOHCOInHQOAHfEwBq1CBFK6mWIPABMSuRBjU3RijYQw7oi6Wt+iOW9+RlIYiH2tExBJAhqJFaCBqbgqJZx6m4LZCPHACBNKRIIQ0xJCUVJCEEiJTQCbTaEijuBpbONrBkMO0l8i6xCGIGImIxNRmjFEZQMNmjE7FAqRIKhh4QAABJ0lEQVRTEAYgJhG/EBqGKOBESKpRTIjRiogk7GEbRUQEiBpkH4aFMsRoAoUNIyuIJYggAy1S6xJjO4sKrCaHKO0JFP9QA3e0YIJaRtEiiJtBlJ+kEgGMOEhqJQh4mJGvgRn3F3ZiIcYv7LF7zp4hI1B5JqZaFiE7Q0lX1tIlFUW6hB+QQCSJKQqExUKYdBChipE9EaL0MQHE6dBgROqkq0AGnkRpEGhZXokBoqJIDToRV5CQJF8qK0bCQC8sYF8K1F8kqSNkqLZFcqKBFCNkQJSMaBkPdZgCqOXROTLZ2C1YBtF0IYcT0rkMOVFkBW8YMkm4JhJCi4lMoxVZnkVAqoS8gxrJRFmNMmEBGJRQ0EAoBYcIJMTEJGKimNFUSp8m5JoJzg1iGbAVIkmUJiK5SFqkFEaWCgZTQE3UaDiahKhKH8R0YOAAJ6qOYeqJlcRTuAMFoZkYD0p0M2J9hiYV5VKIyYgS9h+TJkliGaXA5JhKo5VYmaM9ARgAhI5CqABLY3AEAFIKjJCGBCgQiRELERECMOJBLgXQYEUCqCVRoYwGmNASMEEcRDJAaKRVAFJIlGJjhYDoHMBqtBFvKYHsGIRfJ8wIpuRjRH0sKZBqDPrQRCLKFMqpYIROYtBEuCRaFUhSYHQB1pyCiLFBRxAhQRXtBQBUlDCFQAgBJvABMIo6URAExAVIDyNJNGQ0iGoRGAAhoiIBJlCFSHhEHv8FXAZCJBAEqEYBXCKSGSfVkIAiEAoApYJUGsIaFvZxIXxc0tCZyAFgJEbxhLHKmBMfm0F2R8LkqSQF4RahTJbKCKiIJp7oIqiJIIUCLSKKFIIqZoAMFEI+xhAqYIIIo+IiJLDGISMqYN43qVSKxTjVVBJgJGSMZpJYDlJhDgVnmHFhiJaIcTKCYRCqFh9hKqQCQ0pLkF8IMtSVIYqlR6FBIR0ikUSxVaqYWJVJBMKqNZtKgiJT4IQKSqioZQiEQoVEjKiSIRpbWkGKAkYcEkEiLIOuCYGaA0TomMMHhSEikUCJJ1MSSI5kDQNRROlKJSjJKqJTkVJiGCgFKiRJIaqimSqSoIqCViFKJbBKiJIAiEEEQQkBpikBhICqgIiAA0ICqBJFKiAqCaCCCFJVKWJnCVQBJIJYCYgAIBAmMqAIAIk0PECQiPSHqSiIiAiSk2qmqJRKpQ0hBQF8qiKkFVAAsQlm9UCQHXCA8jBHNSgFAI1JJTLAVoFPIlGEioiIkRR2IoTIAFwKICUCUIYBJMFIqIGgIiA5pJU0AiwCGpSKJGkAAAABJRU5ErkJggg==";
   const lg = document.getElementById('app-logo-lg');
   if(lg) lg.src = src;
   document.querySelectorAll('.app-logo-sm').forEach(i => i.src = src);
 })();
+
+autoLogin();
 </script>
 </body>
 </html>
