@@ -34,6 +34,7 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--orange)}
 .btn-primary{width:100%;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px}
 .btn-primary:active{opacity:0.88}
 .btn-secondary{width:100%;background:#fff;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:15px;cursor:pointer;margin-top:10px}
+.btn-outline{background:#fff;color:var(--orange);border:1px solid var(--orange);border-radius:10px;padding:10px 16px;font-size:14px;cursor:pointer;font-family:inherit;font-weight:600}
 .greeting{margin-bottom:1.5rem}
 .greeting .name{font-size:20px;font-weight:600;color:var(--text)}
 .greeting .sub{font-size:13px;color:var(--muted);margin-top:3px}
@@ -94,16 +95,44 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--orange)}
 .ss-dropdown.open{display:block}
 .ss-option{padding:11px 13px;font-size:15px;cursor:pointer;border-bottom:1px solid var(--border);color:var(--text)}
 .ss-option:last-child{border-bottom:none}
-.ss-option:hover,.ss-option.highlighted{background:var(--orange-light);color:var(--orange);font-weight:600}
+.ss-option:hover{background:var(--orange-light);color:var(--orange);font-weight:600}
 .ss-empty{padding:11px 13px;font-size:14px;color:var(--muted)}
 input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
-.ver-desc-box{background:#f8f8f8;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--muted);margin-bottom:14px;min-height:36px;display:none}
+.ver-desc-box{background:#f8f8f8;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--muted);margin-bottom:14px;display:none}
 .ver-desc-box.visible{display:block}
+/* טאבים */
+.tabs{display:flex;background:#fff;border-bottom:2px solid var(--border);margin-bottom:16px}
+.tab{flex:1;padding:12px;text-align:center;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px}
+.tab.active{color:var(--orange);border-bottom-color:var(--orange)}
+/* כרטיס תבנית */
+.mold-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.mold-card:active{border-color:var(--orange)}
+.mold-num{font-size:16px;font-weight:700;color:var(--text)}
+.mold-count{font-size:12px;color:var(--muted);margin-top:2px}
+/* כרטיס וורסיה */
+.ver-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;margin-bottom:10px;cursor:pointer}
+.ver-card:active{border-color:var(--orange)}
+.ver-sku{font-size:15px;font-weight:700;color:var(--text)}
+.ver-desc{font-size:13px;color:var(--muted);margin-top:3px}
+/* פרטי וורסיה */
+.detail-stat{background:#f8f8f8;border-radius:10px;padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.detail-stat .slabel{font-size:12px;color:var(--muted)}
+.detail-stat .svalue{font-size:14px;font-weight:700;color:var(--text)}
+/* היסטוריה */
+.history-btn{width:100%;background:#fff;color:var(--blue);border:1px solid var(--blue);border-radius:10px;padding:11px;font-size:14px;cursor:pointer;font-family:inherit;font-weight:600;margin-bottom:10px}
+.history-list{display:none}
+.history-list.open{display:block}
+.history-item{background:#fff;border-radius:10px;border:1px solid var(--border);padding:12px;margin-bottom:8px}
+.history-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.history-item-type{font-size:13px;font-weight:600}
+.history-item-type.fix{color:var(--orange)}
+.history-item-type.ver{color:var(--green)}
+.history-item-meta{font-size:12px;color:var(--muted)}
 /* DASHBOARD */
 #screen-dashboard{background:#f0f0f0}
 .dash-cols{display:flex;gap:12px;padding:0 12px 16px;align-items:flex-start}
 .dash-col{flex:1;min-width:0}
-.dash-col-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-radius:10px 10px 0 0;display:flex;align-items:center;gap:6px}
+.dash-col-title{font-size:13px;font-weight:700;text-transform:uppercase;padding:8px 10px;border-radius:10px 10px 0 0;display:flex;align-items:center;gap:6px}
 .dash-col-title.fix-title{background:var(--orange-light);color:var(--orange)}
 .dash-col-title.ver-title{background:var(--green-light);color:var(--green)}
 .dash-col-body{background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 10px 10px;min-height:80px}
@@ -111,11 +140,10 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
 .dash-item:last-child{border-bottom:none}
 .dash-item-info{flex:1;min-width:0}
 .dash-item-mold{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dash-item-ver{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-item-ver{font-size:11px;color:var(--muted);margin-top:2px}
 .dash-item-worker{font-size:11px;color:var(--muted)}
 .dash-arrows{display:flex;flex-direction:column;gap:2px;flex-shrink:0}
 .dash-btn{background:none;border:1px solid var(--border);border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--muted);padding:0}
-.dash-btn:active{background:var(--gray)}
 .dash-btn:disabled{opacity:0.3;cursor:default}
 .dash-empty{padding:20px 12px;text-align:center;color:var(--muted);font-size:13px}
 .dash-refresh{background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;margin-right:auto;padding:4px 8px}
@@ -166,7 +194,7 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
     </div>
     <div class="action-card" onclick="goTo('screen-search')">
       <div class="icon-wrap blue">🔍</div>
-      <div class="card-text"><div class="title">חיפוש מוצר</div><div class="sub">לפי מק"ט, תיאור או תבנית</div></div>
+      <div class="card-text"><div class="title">חיפוש</div><div class="sub">תבניות ומוצרים</div></div>
       <span class="chevron">‹</span>
     </div>
     <div class="action-card" onclick="goTo('screen-dashboard')">
@@ -215,7 +243,7 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
       <textarea id="fix-notes" rows="2" placeholder="הערות נוספות" style="resize:none"></textarea>
       <label>תמונה</label>
       <input type="file" id="fix-photo" accept="image/*" capture="environment" style="display:none" onchange="previewPhoto('fix')">
-      <div class="photo-area" id="fix-photo-area" onclick="takePhoto('fix')">
+      <div class="photo-area" id="fix-photo-area" onclick="document.getElementById('fix-photo').click()">
         <span class="icon">📷</span>
         <div class="txt">לחץ לצילום / בחירת תמונה</div>
       </div>
@@ -267,7 +295,7 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
       <textarea id="ver-notes" rows="2" placeholder="הערות נוספות" style="resize:none"></textarea>
       <label>תמונה</label>
       <input type="file" id="ver-photo" accept="image/*" capture="environment" style="display:none" onchange="previewPhoto('ver')">
-      <div class="photo-area" id="ver-photo-area" onclick="takePhoto('ver')">
+      <div class="photo-area" id="ver-photo-area" onclick="document.getElementById('ver-photo').click()">
         <span class="icon">📷</span>
         <div class="txt">לחץ לצילום / בחירת תמונה</div>
       </div>
@@ -289,15 +317,48 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
 <div id="screen-search" class="screen">
   <div class="topbar">
     <button class="topbar-back" onclick="goTo('screen-home')">›</button>
-    <span class="logo" style="font-size:15px">🔍 חיפוש מוצר</span>
+    <span class="logo" style="font-size:15px">🔍 חיפוש</span>
   </div>
   <div class="content">
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="search-input" placeholder='מק"ט, תיאור או מספר תבנית' oninput="doSearch()">
+    <div class="tabs">
+      <div class="tab active" id="tab-molds" onclick="switchTab('molds')">🏭 תבניות</div>
+      <div class="tab" id="tab-products" onclick="switchTab('products')">📦 מוצרים</div>
     </div>
-    <div id="search-results"><div class="empty"><span class="icon">🔍</span>הקלד לחיפוש מוצר</div></div>
+    <!-- חיפוש תבניות -->
+    <div id="search-molds-panel">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-molds-input" placeholder="חפש מספר או שם תבנית..." oninput="doSearchMolds()">
+      </div>
+      <div id="search-molds-results"><div class="empty"><span class="icon">🏭</span>הקלד לחיפוש תבנית</div></div>
+    </div>
+    <!-- חיפוש מוצרים -->
+    <div id="search-products-panel" style="display:none">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-products-input" placeholder='חפש מק"ט או תיאור מוצר...' oninput="doSearchProducts()">
+      </div>
+      <div id="search-products-results"><div class="empty"><span class="icon">📦</span>הקלד לחיפוש מוצר</div></div>
+    </div>
   </div>
+</div>
+
+<!-- MOLD DETAIL -->
+<div id="screen-mold-detail" class="screen">
+  <div class="topbar">
+    <button class="topbar-back" onclick="goTo('screen-search')">›</button>
+    <span class="logo" style="font-size:15px" id="mold-detail-title">פרטי תבנית</span>
+  </div>
+  <div class="content" id="mold-detail-content"></div>
+</div>
+
+<!-- VERSION DETAIL -->
+<div id="screen-ver-detail" class="screen">
+  <div class="topbar">
+    <button class="topbar-back" id="ver-detail-back" onclick="goTo('screen-mold-detail')">›</button>
+    <span class="logo" style="font-size:15px" id="ver-detail-title">פרטי וורסיה</span>
+  </div>
+  <div class="content" id="ver-detail-content"></div>
 </div>
 
 <!-- REPORTS -->
@@ -355,19 +416,52 @@ input:disabled{background:#f0f0f0;color:#aaa;cursor:not-allowed}
 </div>
 
 <script>
+// ── הגדרות מרכזיות ──
 const API = 'https://script.google.com/macros/s/AKfycbzJsLI-zc8KWichm9EiXKlibsFVoy9Du-8jYSR2cKqigsf4I7ypUkopYyEcLOB__xcS/exec';
 
+const CACHE_CONFIG = {
+  molds:    { key: 'pf_molds',    ttl: 24 * 60 * 60 * 1000 },  // 24 שעות
+  versions: { key: 'pf_vers_',    ttl: 24 * 60 * 60 * 1000 },  // 24 שעות
+  reports:  { key: 'pf_reports',  ttl: 30 * 60 * 1000 },        // 30 דקות
+  workers:  { key: 'pf_workers',  ttl: 6  * 60 * 60 * 1000 },  // 6 שעות
+};
+
+const PHOTO_CONFIG = {
+  maxWidth: 1200,
+  quality:  0.8,
+};
+
+// ── State ──
 let currentWorker = '';
-let fixStatus = 'wait';
-let verStatus = 'wait';
+let fixStatus = 'wait', verStatus = 'wait';
 let currentFilter = 'all';
 let allReports = [];
 let allMolds = [];
 let dashData = { fix: [], ver: [] };
+let fixPhotoUrl = '', verPhotoUrl = '';
+let currentMold = null; // תבנית נבחרת
+let currentVer  = null; // וורסיה נבחרת
 
-// תמונות — מאחסן URL שהוחזר מ-Drive
-let fixPhotoUrl = '';
-let verPhotoUrl = '';
+// ── localStorage Cache ──
+const lsCache = {
+  get(key) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return null;
+      const { data, exp } = JSON.parse(raw);
+      if (Date.now() > exp) { localStorage.removeItem(key); return null; }
+      return data;
+    } catch(e) { return null; }
+  },
+  set(key, data, ttl) {
+    try {
+      localStorage.setItem(key, JSON.stringify({ data, exp: Date.now() + ttl }));
+    } catch(e) {
+      // אם אין מקום — נמחק cache ישן ונמשיך בלי שמירה
+      try { localStorage.clear(); } catch(e2) {}
+    }
+  }
+};
 
 // ── JSONP ──
 let _cbCount = 0;
@@ -407,6 +501,34 @@ async function apiPost(body) {
   return res.json();
 }
 
+// ── smartFetch — טעינה חכמה עם cache ──
+async function smartFetch(action, params = {}, cacheKey = null, ttl = null) {
+  // 1. נסה localStorage
+  if (cacheKey) {
+    const local = lsCache.get(cacheKey);
+    if (local) return local;
+  }
+  // 2. נסה שרת
+  try {
+    const data = await jsonp({ action, ...params });
+    if (cacheKey && ttl && !data.error) lsCache.set(cacheKey, data, ttl);
+    return data;
+  } catch(e) {
+    // 3. אם שרת נכשל — החזר cache פג תוקף אם יש
+    if (cacheKey) {
+      try {
+        const raw = localStorage.getItem(cacheKey);
+        if (raw) {
+          const { data } = JSON.parse(raw);
+          showToast('⚠️ מציג נתונים ממטמון');
+          return data;
+        }
+      } catch(e2) {}
+    }
+    throw e;
+  }
+}
+
 // ── ניווט ──
 function goTo(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -414,15 +536,27 @@ function goTo(id) {
   if (id === 'screen-fix') initForm('fix');
   if (id === 'screen-ver') initForm('ver');
   if (id === 'screen-reports') loadReports();
-  if (id === 'screen-search') document.getElementById('search-input').value = '';
   if (id === 'screen-dashboard') loadDashboard();
+  if (id === 'screen-search') {
+    document.getElementById('search-molds-input').value = '';
+    document.getElementById('search-products-input').value = '';
+    document.getElementById('search-molds-results').innerHTML = '<div class="empty"><span class="icon">🏭</span>הקלד לחיפוש תבנית</div>';
+    document.getElementById('search-products-results').innerHTML = '<div class="empty"><span class="icon">📦</span>הקלד לחיפוש מוצר</div>';
+  }
+}
+
+// ── טאבים בחיפוש ──
+function switchTab(tab) {
+  document.getElementById('tab-molds').classList.toggle('active', tab === 'molds');
+  document.getElementById('tab-products').classList.toggle('active', tab === 'products');
+  document.getElementById('search-molds-panel').style.display = tab === 'molds' ? 'block' : 'none';
+  document.getElementById('search-products-panel').style.display = tab === 'products' ? 'block' : 'none';
 }
 
 // ── כניסה ──
 async function doLogin() {
-  const sel = document.getElementById('worker-select');
+  const name = document.getElementById('worker-select').value;
   const code = document.getElementById('worker-code').value.trim();
-  const name = sel.value;
   if (!name) { showToast('אנא בחר שם מהרשימה'); return; }
   if (!code) { showToast('אנא הכנס קוד אישי'); return; }
   const btn = document.getElementById('login-btn');
@@ -450,7 +584,6 @@ function logout() {
   localStorage.removeItem('pf_code');
   document.getElementById('worker-select').value = '';
   document.getElementById('worker-code').value = '';
-  document.getElementById('login-error').style.display = 'none';
   goTo('screen-login');
 }
 
@@ -469,18 +602,16 @@ async function autoLogin() {
       localStorage.removeItem('pf_worker');
       localStorage.removeItem('pf_code');
       loadWorkersDropdown();
-      showToast('הגישה שלך הוסרה, אנא פנה למנהל');
     }
   } catch(e) { loadWorkersDropdown(); }
 }
 
 async function loadWorkersDropdown() {
   try {
-    const data = await jsonp({ action: 'getWorkers' });
-    const workers = data.workers || [];
+    const data = await smartFetch('getWorkers', {}, CACHE_CONFIG.workers.key, CACHE_CONFIG.workers.ttl);
     const sel = document.getElementById('worker-select');
     sel.innerHTML = '<option value="">-- בחר שם --</option>';
-    workers.forEach(w => {
+    (data.workers || []).forEach(w => {
       const o = document.createElement('option');
       o.value = w.name; o.textContent = w.name;
       sel.appendChild(o);
@@ -505,60 +636,50 @@ function renderDropdown(fieldId, query) {
   const items = ssData[fieldId] || [];
   const q = query.trim().toLowerCase();
   const isObj = items.length > 0 && typeof items[0] === 'object';
-  const filtered = q
-    ? items.filter(i => isObj
-        ? (i.sku.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q))
-        : i.toLowerCase().includes(q))
-    : items;
+  const filtered = q ? items.filter(i => isObj
+    ? (i.sku.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q))
+    : i.toLowerCase().includes(q)) : items;
   const dd = document.getElementById(fieldId+'-dropdown');
   if (!filtered.length) { dd.innerHTML = '<div class="ss-empty">לא נמצאו תוצאות</div>'; return; }
   dd.innerHTML = filtered.map(i => {
     if (isObj) {
-      const label = `<strong>${highlight(i.sku, q)}</strong><span style="color:var(--muted);font-size:13px;margin-right:8px">${highlight(i.desc, q)}</span>`;
-      const safeVal = i.sku.replace(/'/g,"\\'");
-      const safeDesc = i.desc.replace(/'/g,"\\'");
-      return `<div class="ss-option" onmousedown="selectOption('${fieldId}','${safeVal}','${safeDesc}')">${label}</div>`;
+      const label = `<strong>${hl(i.sku,q)}</strong><span style="color:var(--muted);font-size:13px;margin-right:8px">${hl(i.desc,q)}</span>`;
+      return `<div class="ss-option" onmousedown="selectOption('${fieldId}','${i.sku.replace(/'/g,"\\'")}','${i.desc.replace(/'/g,"\\'")}')">${label}</div>`;
     } else {
-      const safe = i.replace(/'/g,"\\'");
-      return `<div class="ss-option" onmousedown="selectOption('${fieldId}','${safe}')">${highlight(i, q)}</div>`;
+      return `<div class="ss-option" onmousedown="selectOption('${fieldId}','${i.replace(/'/g,"\\'")}')">${hl(i,q)}</div>`;
     }
   }).join('');
 }
-function highlight(text, q) {
-  if (!q) return text;
+function hl(text, q) {
+  if (!q || !text) return text;
   const idx = text.toLowerCase().indexOf(q);
   if (idx === -1) return text;
   return text.substring(0,idx)+'<strong>'+text.substring(idx,idx+q.length)+'</strong>'+text.substring(idx+q.length);
 }
 function selectOption(fieldId, value, desc) {
-  const displayVal = desc ? value + ' — ' + desc : value;
-  document.getElementById(fieldId+'-input').value = displayVal;
+  document.getElementById(fieldId+'-input').value = desc ? value + ' — ' + desc : value;
   document.getElementById(fieldId).value = value;
   document.getElementById(fieldId+'-dropdown').classList.remove('open');
   if (fieldId === 'ver-cur') {
     const box = document.getElementById('ver-cur-desc');
-    if (desc) { box.textContent = '📋 ' + desc; box.classList.add('visible'); }
-    else box.classList.remove('visible');
+    if (desc) { box.textContent = '📋 ' + desc; box.style.display = 'block'; }
+    else box.style.display = 'none';
   }
   if (fieldId === 'ver-new') {
     const box = document.getElementById('ver-new-desc');
-    if (desc) { box.textContent = '📋 ' + desc; box.classList.add('visible'); }
-    else box.classList.remove('visible');
+    if (desc) { box.textContent = '📋 ' + desc; box.style.display = 'block'; }
+    else box.style.display = 'none';
   }
   if (fieldId === 'fix-mold') loadVersionsFor('fix', value);
   if (fieldId === 'ver-mold') loadVersionsFor('ver', value);
 }
-function setSSData(fieldId, items) { ssData[fieldId] = items; }
 
-const _cache = {};
 async function loadMolds() {
   try {
-    let molds;
-    if (_cache.molds) { molds = _cache.molds; }
-    else { const data = await jsonp({ action: 'getMolds' }); molds = data.molds || []; _cache.molds = molds; }
-    allMolds = molds;
-    setSSData('fix-mold', allMolds);
-    setSSData('ver-mold', allMolds);
+    const data = await smartFetch('getMolds', {}, CACHE_CONFIG.molds.key, CACHE_CONFIG.molds.ttl);
+    allMolds = (data.molds || []).map(m => m.mold || m);
+    ssData['fix-mold'] = allMolds;
+    ssData['ver-mold'] = allMolds;
   } catch(e) { showToast('שגיאה בטעינת תבניות'); }
 }
 
@@ -569,32 +690,29 @@ async function loadVersionsFor(form, mold) {
     document.getElementById(id+'-input').disabled = true;
     document.getElementById(id+'-input').placeholder = 'טוען...';
     document.getElementById(id).value = '';
-    setSSData(id, []);
+    ssData[id] = [];
   });
   if (form === 'ver') {
-    document.getElementById('ver-cur-desc').classList.remove('visible');
-    document.getElementById('ver-new-desc').classList.remove('visible');
+    document.getElementById('ver-cur-desc').style.display = 'none';
+    document.getElementById('ver-new-desc').style.display = 'none';
   }
   try {
-    let vers;
-    const cacheKey = 'ver_' + mold;
-    if (_cache[cacheKey]) { vers = _cache[cacheKey]; }
-    else { const data = await jsonp({ action: 'getVersions', mold }); vers = data.versions || []; _cache[cacheKey] = vers; }
+    const cacheKey = CACHE_CONFIG.versions.key + mold;
+    const data = await smartFetch('getVersions', { mold }, cacheKey, CACHE_CONFIG.versions.ttl);
     targets.forEach(id => {
-      setSSData(id, vers);
+      ssData[id] = data.versions || [];
       document.getElementById(id+'-input').disabled = false;
       document.getElementById(id+'-input').placeholder = 'הקלד לחיפוש וורסיה...';
     });
   } catch(e) { showToast('שגיאה בטעינת וורסיות'); }
 }
 
+// ── טפסים ──
 function initForm(form) {
   document.getElementById(form+'-date').value = nowStr();
   if (form === 'fix') {
-    fixStatus = 'wait';
-    fixPhotoUrl = '';
-    document.getElementById('fix-fault').value = '';
-    document.getElementById('fix-notes').value = '';
+    fixStatus = 'wait'; fixPhotoUrl = '';
+    ['fix-fault','fix-notes'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('fix-preview').style.display = 'none';
     document.getElementById('fix-photo-area').style.display = 'block';
     document.getElementById('fix-photo-clear').style.display = 'none';
@@ -606,8 +724,7 @@ function initForm(form) {
     document.getElementById('fix-ver-input').disabled = true;
     document.getElementById('fix-ver').value = '';
   } else {
-    verStatus = 'wait';
-    verPhotoUrl = '';
+    verStatus = 'wait'; verPhotoUrl = '';
     document.getElementById('ver-notes').value = '';
     document.getElementById('ver-preview').style.display = 'none';
     document.getElementById('ver-photo-area').style.display = 'block';
@@ -616,8 +733,8 @@ function initForm(form) {
     document.getElementById('ver-photo').value = '';
     document.getElementById('ver-mold-input').value = '';
     document.getElementById('ver-mold').value = '';
-    document.getElementById('ver-cur-desc').classList.remove('visible');
-    document.getElementById('ver-new-desc').classList.remove('visible');
+    document.getElementById('ver-cur-desc').style.display = 'none';
+    document.getElementById('ver-new-desc').style.display = 'none';
     ['ver-cur','ver-new'].forEach(id => {
       document.getElementById(id+'-input').value = '';
       document.getElementById(id+'-input').disabled = true;
@@ -629,7 +746,6 @@ function initForm(form) {
 }
 
 function nowStr() { return new Date().toLocaleString('he-IL'); }
-
 function setStatus(form, val) {
   if (form === 'fix') fixStatus = val; else verStatus = val;
   resetStatusBtns(form);
@@ -641,42 +757,24 @@ function resetStatusBtns(form) {
 }
 
 // ── תמונות ──
-function takePhoto(form) {
-  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => { stream.getTracks().forEach(t => t.stop()); document.getElementById(form+'-photo').click(); })
-      .catch(() => document.getElementById(form+'-photo').click());
-  } else { document.getElementById(form+'-photo').click(); }
-}
-
 function previewPhoto(form) {
   const file = document.getElementById(form+'-photo').files[0];
   if (!file) return;
-
-  // הצג תמונה מיידית
   const img = document.getElementById(form+'-preview');
   img.src = URL.createObjectURL(file);
   img.style.display = 'block';
   document.getElementById(form+'-photo-area').style.display = 'none';
   document.getElementById(form+'-photo-uploading').style.display = 'block';
+  document.getElementById(form+'-photo-uploading').textContent = '⏳ מעלה תמונה...';
   document.getElementById(form+'-photo-clear').style.display = 'none';
-
-  // העלה ל-Drive ברקע
   const mold = document.getElementById(form+'-mold').value || 'כללי';
   uploadPhotoToDrive(form, file, mold);
 }
 
 async function uploadPhotoToDrive(form, file, mold) {
   try {
-    // המר לbase64
     const base64 = await fileToBase64(file);
-    const res = await apiPost({
-      action: 'uploadPhoto',
-      base64: base64,
-      mimeType: file.type,
-      mold: mold
-    });
-
+    const res = await apiPost({ action: 'uploadPhoto', base64, mimeType: file.type, mold });
     if (res.success) {
       if (form === 'fix') fixPhotoUrl = res.url;
       else verPhotoUrl = res.url;
@@ -695,22 +793,20 @@ async function uploadPhotoToDrive(form, file, mold) {
 
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
-    // כווץ את התמונה לפני שליחה
     const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
-        const MAX = 1200;
         let w = img.width, h = img.height;
+        const MAX = PHOTO_CONFIG.maxWidth;
         if (w > MAX || h > MAX) {
           if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
           else { w = Math.round(w * MAX / h); h = MAX; }
         }
         canvas.width = w; canvas.height = h;
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-        resolve(dataUrl.split(',')[1]);
+        resolve(canvas.toDataURL('image/jpeg', PHOTO_CONFIG.quality).split(',')[1]);
       };
       img.src = e.target.result;
     };
@@ -722,60 +818,231 @@ function fileToBase64(file) {
 function clearPhoto(form) {
   document.getElementById(form+'-photo').value = '';
   document.getElementById(form+'-preview').style.display = 'none';
-  document.getElementById(form+'-preview').src = '';
   document.getElementById(form+'-photo-area').style.display = 'block';
   document.getElementById(form+'-photo-clear').style.display = 'none';
   document.getElementById(form+'-photo-uploading').style.display = 'none';
   document.getElementById(form+'-photo-uploading').textContent = '⏳ מעלה תמונה...';
-  if (form === 'fix') fixPhotoUrl = '';
-  else verPhotoUrl = '';
+  if (form === 'fix') fixPhotoUrl = ''; else verPhotoUrl = '';
 }
 
 // ── שליחת טופס ──
 async function submitForm(form) {
   const btn = document.getElementById(form+'-submit-btn');
-
-  // בדוק שתמונה לא עדיין בהעלאה
   const uploadingEl = document.getElementById(form+'-photo-uploading');
   if (uploadingEl.style.display !== 'none' && uploadingEl.textContent.includes('מעלה')) {
-    showToast('אנא המתן לסיום העלאת התמונה');
-    return;
+    showToast('אנא המתן לסיום העלאת התמונה'); return;
   }
-
   if (form === 'fix') {
     const mold = document.getElementById('fix-mold').value;
-    const ver = document.getElementById('fix-ver').value;
+    const ver  = document.getElementById('fix-ver').value;
     const fault = document.getElementById('fix-fault').value.trim();
     if (!mold || !ver || !fault) { showToast('אנא מלא את כל השדות החובה *'); return; }
     btn.textContent = 'שולח...'; btn.disabled = true;
     try {
-      await apiPost({ action:'addReport', worker:currentWorker, type:'תיקון תבנית', mold, verCur:ver, fault, notes:document.getElementById('fix-notes').value, photoUrl: fixPhotoUrl, status: fixStatus==='wait'?'ממתין':'בוצע' });
+      await apiPost({ action:'addReport', worker:currentWorker, type:'תיקון תבנית', mold, verCur:ver, fault, notes:document.getElementById('fix-notes').value, photoUrl:fixPhotoUrl, status:fixStatus==='wait'?'ממתין':'בוצע' });
+      lsCache.set(CACHE_CONFIG.reports.key, null, 0); // נקה cache דיווחים
       showToast('✅ הדיווח נשלח בהצלחה!');
       setTimeout(() => goTo('screen-reports'), 800);
     } catch(e) { showToast('שגיאה בשליחה, נסה שוב'); }
-    btn.textContent = 'שלח דיווח'; btn.disabled = false;
   } else {
     const mold = document.getElementById('ver-mold').value;
-    const cur = document.getElementById('ver-cur').value;
-    const nv = document.getElementById('ver-new').value;
-    const curDesc = document.getElementById('ver-cur-desc').textContent.replace('📋 ','');
-    const newDesc = document.getElementById('ver-new-desc').textContent.replace('📋 ','');
+    const cur  = document.getElementById('ver-cur').value;
+    const nv   = document.getElementById('ver-new').value;
+    const curDesc = (document.getElementById('ver-cur-desc').textContent || '').replace('📋 ','');
+    const newDesc = (document.getElementById('ver-new-desc').textContent || '').replace('📋 ','');
     if (!mold || !cur || !nv) { showToast('אנא מלא את כל השדות החובה *'); return; }
     btn.textContent = 'שולח...'; btn.disabled = true;
     try {
-      await apiPost({ action:'addReport', worker:currentWorker, type:'החלפת וורסיה', mold, verCur:cur, desc1:curDesc, verNew:nv, desc2:newDesc, notes:document.getElementById('ver-notes').value, photoUrl: verPhotoUrl, status: verStatus==='wait'?'ממתין':'בוצע' });
+      await apiPost({ action:'addReport', worker:currentWorker, type:'החלפת וורסיה', mold, verCur:cur, desc1:curDesc, verNew:nv, desc2:newDesc, notes:document.getElementById('ver-notes').value, photoUrl:verPhotoUrl, status:verStatus==='wait'?'ממתין':'בוצע' });
+      lsCache.set(CACHE_CONFIG.reports.key, null, 0);
       showToast('✅ הדיווח נשלח בהצלחה!');
       setTimeout(() => goTo('screen-reports'), 800);
     } catch(e) { showToast('שגיאה בשליחה, נסה שוב'); }
-    btn.textContent = 'שלח דיווח'; btn.disabled = false;
   }
+  btn.textContent = 'שלח דיווח'; btn.disabled = false;
+}
+
+// ── חיפוש תבניות ──
+let moldsSearchTimer;
+function doSearchMolds() {
+  clearTimeout(moldsSearchTimer);
+  const q = document.getElementById('search-molds-input').value.trim();
+  if (!q) {
+    document.getElementById('search-molds-results').innerHTML = '<div class="empty"><span class="icon">🏭</span>הקלד לחיפוש תבנית</div>';
+    return;
+  }
+  moldsSearchTimer = setTimeout(async () => {
+    document.getElementById('search-molds-results').innerHTML = '<div class="loader"><div class="spinner"></div>מחפש...</div>';
+    try {
+      const data = await smartFetch('getMolds', {}, CACHE_CONFIG.molds.key, CACHE_CONFIG.molds.ttl);
+      const molds = data.molds || [];
+      const ql = q.toLowerCase();
+      const filtered = molds.filter(m => m.mold.toLowerCase().includes(ql));
+      if (!filtered.length) {
+        document.getElementById('search-molds-results').innerHTML = '<div class="empty"><span class="icon">😕</span>לא נמצאו תבניות</div>';
+        return;
+      }
+      document.getElementById('search-molds-results').innerHTML = filtered.map(m => `
+        <div class="mold-card" onclick="showMoldDetail('${m.mold.replace(/'/g,"\\'")}')">
+          <div>
+            <div class="mold-num">תבנית ${hl(m.mold, ql)}</div>
+            <div class="mold-count">${m.versions.length} וורסיות</div>
+          </div>
+          <span style="color:var(--muted);font-size:20px">‹</span>
+        </div>`).join('');
+    } catch(e) { showToast('שגיאה בחיפוש'); }
+  }, 300);
+}
+
+// ── פרטי תבנית ──
+async function showMoldDetail(mold) {
+  currentMold = mold;
+  document.getElementById('mold-detail-title').textContent = 'תבנית ' + mold;
+  document.getElementById('mold-detail-content').innerHTML = '<div class="loader"><div class="spinner"></div>טוען...</div>';
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-mold-detail').classList.add('active');
+  try {
+    const data = await smartFetch('getMoldDetails', { mold }, CACHE_CONFIG.versions.key + mold, CACHE_CONFIG.versions.ttl);
+    const versions = data.versions || [];
+    const verHTML = versions.map(v => `
+      <div class="ver-card" onclick="showVerDetail('${v.sku.replace(/'/g,"\\'")}')">
+        <div class="ver-sku">${v.sku}</div>
+        <div class="ver-desc">${v.desc || '—'}</div>
+      </div>`).join('');
+    document.getElementById('mold-detail-content').innerHTML = `
+      <button class="history-btn" onclick="toggleMoldHistory('${mold.replace(/'/g,"\\'")}', this)">📋 היסטוריית תבנית ${mold}</button>
+      <div class="history-list" id="mold-history-${mold.replace(/\//g,'_')}"></div>
+      <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:10px">${versions.length} וורסיות:</div>
+      ${verHTML || '<div class="empty">אין וורסיות</div>'}`;
+  } catch(e) {
+    document.getElementById('mold-detail-content').innerHTML = '<div class="empty">שגיאה בטעינת פרטים</div>';
+  }
+}
+
+async function toggleMoldHistory(mold, btn) {
+  const listId = 'mold-history-' + mold.replace(/\//g,'_');
+  const list = document.getElementById(listId);
+  if (!list) return;
+  if (list.classList.contains('open')) {
+    list.classList.remove('open');
+    btn.textContent = `📋 היסטוריית תבנית ${mold}`;
+    return;
+  }
+  btn.textContent = '⏳ טוען...';
+  try {
+    const data = await jsonp({ action: 'getMoldHistory', mold });
+    const reports = data.reports || [];
+    list.innerHTML = reports.length
+      ? reports.map(r => historyItemHTML(r)).join('')
+      : '<div class="empty" style="padding:1rem">אין דיווחים לתבנית זו</div>';
+    list.classList.add('open');
+    btn.textContent = `📋 הסתר היסטוריה`;
+  } catch(e) { btn.textContent = `📋 שגיאה`; }
+}
+
+// ── פרטי וורסיה ──
+async function showVerDetail(sku) {
+  currentVer = sku;
+  document.getElementById('ver-detail-title').textContent = sku;
+  document.getElementById('ver-detail-content').innerHTML = '<div class="loader"><div class="spinner"></div>טוען...</div>';
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-ver-detail').classList.add('active');
+  try {
+    // מצא פרטי וורסיה מפרטי התבנית הנוכחית
+    const data = await smartFetch('getMoldDetails', { mold: currentMold }, CACHE_CONFIG.versions.key + currentMold, CACHE_CONFIG.versions.ttl);
+    const ver = (data.versions || []).find(v => v.sku === sku);
+    if (!ver) { document.getElementById('ver-detail-content').innerHTML = '<div class="empty">לא נמצאו פרטים</div>'; return; }
+    const stats = [
+      { label: 'מק"ט', value: ver.sku },
+      { label: 'תיאור', value: ver.desc || '—' },
+      { label: 'מובלעות', value: ver.inserts || '—' },
+      { label: 'משקל מוצר (גרם)', value: ver.weight || '—' },
+      { label: 'זמן מחזור (שניות)', value: ver.cycleTime || '—' },
+      { label: 'צריכה שנתית', value: ver.annual || '—' },
+    ];
+    document.getElementById('ver-detail-content').innerHTML = `
+      <div class="detail-card">
+        ${stats.map(s => `
+          <div class="detail-row">
+            <span class="dlabel">${s.label}</span>
+            <span class="dvalue">${s.value}</span>
+          </div>`).join('')}
+      </div>
+      <button class="history-btn" onclick="toggleVerHistory('${sku.replace(/'/g,"\\'")}', this)">📋 היסטוריית וורסיה ${sku}</button>
+      <div class="history-list" id="ver-history-${sku.replace(/[^a-zA-Z0-9]/g,'_')}"></div>`;
+  } catch(e) {
+    document.getElementById('ver-detail-content').innerHTML = '<div class="empty">שגיאה בטעינת פרטים</div>';
+  }
+}
+
+async function toggleVerHistory(sku, btn) {
+  const listId = 'ver-history-' + sku.replace(/[^a-zA-Z0-9]/g,'_');
+  const list = document.getElementById(listId);
+  if (!list) return;
+  if (list.classList.contains('open')) {
+    list.classList.remove('open');
+    btn.textContent = `📋 היסטוריית וורסיה ${sku}`;
+    return;
+  }
+  btn.textContent = '⏳ טוען...';
+  try {
+    const data = await jsonp({ action: 'getVerHistory', sku });
+    const reports = data.reports || [];
+    list.innerHTML = reports.length
+      ? reports.map(r => historyItemHTML(r)).join('')
+      : '<div class="empty" style="padding:1rem">אין דיווחים לוורסיה זו</div>';
+    list.classList.add('open');
+    btn.textContent = `📋 הסתר היסטוריה`;
+  } catch(e) { btn.textContent = `📋 שגיאה`; }
+}
+
+function historyItemHTML(r) {
+  const isFix = r.type === 'תיקון תבנית';
+  return `
+    <div class="history-item">
+      <div class="history-item-top">
+        <span class="history-item-type ${isFix?'fix':'ver'}">${isFix?'🔧':'🔄'} ${r.type}</span>
+        <span class="badge ${r.status==='ממתין'?'wait':'done'}">${r.status}</span>
+      </div>
+      <div class="history-item-meta">תבנית: ${r.mold} | ${r.date} | ${r.email}</div>
+      ${r.fault?`<div style="font-size:13px;margin-top:4px;color:var(--text)">${r.fault}</div>`:''}
+      ${r.verNew?`<div style="font-size:12px;margin-top:4px;color:var(--muted)">${r.verCur} ← ${r.verNew}</div>`:''}
+    </div>`;
+}
+
+// ── חיפוש מוצרים ──
+let productsSearchTimer;
+function doSearchProducts() {
+  clearTimeout(productsSearchTimer);
+  const q = document.getElementById('search-products-input').value.trim();
+  if (!q) {
+    document.getElementById('search-products-results').innerHTML = '<div class="empty"><span class="icon">📦</span>הקלד לחיפוש מוצר</div>';
+    return;
+  }
+  document.getElementById('search-products-results').innerHTML = '<div class="loader"><div class="spinner"></div>מחפש...</div>';
+  productsSearchTimer = setTimeout(async () => {
+    try {
+      const data = await jsonp({ action: 'search', q });
+      const products = data.products || [];
+      if (!products.length) {
+        document.getElementById('search-products-results').innerHTML = '<div class="empty"><span class="icon">😕</span>לא נמצאו תוצאות</div>';
+        return;
+      }
+      const ql = q.toLowerCase();
+      document.getElementById('search-products-results').innerHTML = products.map(p => `
+        <div class="report-card">
+          <div class="report-top"><div style="font-size:14px;font-weight:600;color:var(--text)">${hl(String(p.desc||''),ql)}</div></div>
+          <div class="report-meta">מק"ט: ${hl(String(p.sku||''),ql)} | תבנית: ${p.mold}</div>
+        </div>`).join('');
+    } catch(e) { showToast('שגיאה בחיפוש'); }
+  }, 400);
 }
 
 // ── דיווחים ──
 async function loadReports() {
   document.getElementById('reports-list').innerHTML = '<div class="loader"><div class="spinner"></div>טוען דיווחים...</div>';
   try {
-    const data = await jsonp({ action: 'getReports' });
+    const data = await smartFetch('getReports', {}, CACHE_CONFIG.reports.key, CACHE_CONFIG.reports.ttl);
     allReports = data.reports || [];
     renderReports();
   } catch(e) { document.getElementById('reports-list').innerHTML = '<div class="empty">שגיאה בטעינת דיווחים</div>'; }
@@ -808,9 +1075,7 @@ function filterReports(f, el) {
 function showDetail(idx) {
   const r = allReports[idx];
   if (!r) return;
-  const photoHtml = r.photo
-    ? `<img src="${r.photo}" class="detail-photo" onclick="window.open('${r.photo}','_blank')" style="cursor:zoom-in">`
-    : '';
+  const photoHtml = r.photo ? `<img src="${r.photo}" class="detail-photo" onclick="window.open('${r.photo}','_blank')" style="cursor:zoom-in">` : '';
   document.getElementById('detail-content').innerHTML = `
     ${photoHtml}
     <div class="detail-card">
@@ -832,29 +1097,13 @@ async function toggleStatus(idx) {
   const r = allReports[idx];
   try {
     const res = await jsonp({ action:'toggleStatus', id:r.id });
-    if (res.success) { r.status = res.newStatus; showDetail(idx); showToast('סטטוס עודכן בהצלחה'); }
+    if (res.success) {
+      r.status = res.newStatus;
+      lsCache.set(CACHE_CONFIG.reports.key, null, 0);
+      showDetail(idx);
+      showToast('סטטוס עודכן בהצלחה');
+    }
   } catch(e) { showToast('שגיאה בעדכון סטטוס'); }
-}
-
-// ── חיפוש ──
-let searchTimer;
-function doSearch() {
-  clearTimeout(searchTimer);
-  const q = document.getElementById('search-input').value.trim();
-  if (!q) { document.getElementById('search-results').innerHTML = '<div class="empty"><span class="icon">🔍</span>הקלד לחיפוש מוצר</div>'; return; }
-  document.getElementById('search-results').innerHTML = '<div class="loader"><div class="spinner"></div>מחפש...</div>';
-  searchTimer = setTimeout(async () => {
-    try {
-      const data = await jsonp({ action:'search', q });
-      const products = data.products || [];
-      if (!products.length) { document.getElementById('search-results').innerHTML = '<div class="empty"><span class="icon">😕</span>לא נמצאו תוצאות</div>'; return; }
-      document.getElementById('search-results').innerHTML = products.map(p => `
-        <div class="report-card">
-          <div class="report-top"><div style="font-size:14px;font-weight:600;color:var(--text)">${p.desc}</div></div>
-          <div class="report-meta">מק"ט: ${p.sku} | תבנית: ${p.mold}</div>
-        </div>`).join('');
-    } catch(e) { showToast('שגיאה בחיפוש'); }
-  }, 500);
 }
 
 // ── דשבורד ──
@@ -862,7 +1111,7 @@ async function loadDashboard() {
   document.getElementById('dash-cols').innerHTML = '<div class="loader"><div class="spinner"></div>טוען...</div>';
   try {
     if (!allReports.length) {
-      const rep = await jsonp({ action: 'getReports' });
+      const rep = await smartFetch('getReports', {}, CACHE_CONFIG.reports.key, CACHE_CONFIG.reports.ttl);
       allReports = rep.reports || [];
     }
     const data = await jsonp({ action: 'getDashboard' });
@@ -874,8 +1123,6 @@ async function loadDashboard() {
 }
 
 function renderDashboard() {
-  const fixItems = dashData.fix;
-  const verItems = dashData.ver;
   function itemHTML(item, type, idx, total) {
     const verLine = type === 'ver' && item.verNew ? `${item.verCur} ← ${item.verNew}` : item.verCur || '';
     const reportIdx = allReports.findIndex(r => r.id === item.id);
@@ -884,8 +1131,8 @@ function renderDashboard() {
       <div class="dash-item" style="cursor:${reportIdx>=0?'pointer':'default'}">
         <div class="dash-item-info" ${clickHandler}>
           <div class="dash-item-mold">תבנית ${item.mold}</div>
-          ${verLine ? `<div class="dash-item-ver">${verLine}</div>` : ''}
-          <div class="dash-item-worker">${item.worker || ''}</div>
+          ${verLine?`<div class="dash-item-ver">${verLine}</div>`:''}
+          <div class="dash-item-worker">${item.worker||''}</div>
         </div>
         <div class="dash-arrows">
           <button class="dash-btn" onclick="moveItem('${type}',${idx},-1)" ${idx===0?'disabled':''}>▲</button>
@@ -893,15 +1140,15 @@ function renderDashboard() {
         </div>
       </div>`;
   }
-  const fixHTML = fixItems.length ? fixItems.map((it,i) => itemHTML(it,'fix',i,fixItems.length)).join('') : '<div class="dash-empty">אין תיקונים פתוחים ✅</div>';
-  const verHTML = verItems.length ? verItems.map((it,i) => itemHTML(it,'ver',i,verItems.length)).join('') : '<div class="dash-empty">אין החלפות פתוחות ✅</div>';
+  const fixHTML = dashData.fix.length ? dashData.fix.map((it,i) => itemHTML(it,'fix',i,dashData.fix.length)).join('') : '<div class="dash-empty">אין תיקונים פתוחים ✅</div>';
+  const verHTML = dashData.ver.length ? dashData.ver.map((it,i) => itemHTML(it,'ver',i,dashData.ver.length)).join('') : '<div class="dash-empty">אין החלפות פתוחות ✅</div>';
   document.getElementById('dash-cols').innerHTML = `
     <div class="dash-col">
-      <div class="dash-col-title fix-title">🔧 תיקונים <span style="margin-right:auto;background:rgba(0,0,0,0.1);border-radius:10px;padding:1px 8px;font-size:12px">${fixItems.length}</span></div>
+      <div class="dash-col-title fix-title">🔧 תיקונים <span style="margin-right:auto;background:rgba(0,0,0,0.1);border-radius:10px;padding:1px 8px;font-size:12px">${dashData.fix.length}</span></div>
       <div class="dash-col-body">${fixHTML}</div>
     </div>
     <div class="dash-col">
-      <div class="dash-col-title ver-title">🔄 החלפות <span style="margin-right:auto;background:rgba(0,0,0,0.1);border-radius:10px;padding:1px 8px;font-size:12px">${verItems.length}</span></div>
+      <div class="dash-col-title ver-title">🔄 החלפות <span style="margin-right:auto;background:rgba(0,0,0,0.1);border-radius:10px;padding:1px 8px;font-size:12px">${dashData.ver.length}</span></div>
       <div class="dash-col-body">${verHTML}</div>
     </div>`;
 }
@@ -913,7 +1160,7 @@ async function moveItem(type, idx, dir) {
   [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
   renderDashboard();
   try {
-    await apiPost({ action: 'saveDashboardOrder', fix: dashData.fix.map(it => it.id), ver: dashData.ver.map(it => it.id) });
+    await apiPost({ action:'saveDashboardOrder', fix:dashData.fix.map(it=>it.id), ver:dashData.ver.map(it=>it.id) });
   } catch(e) { showToast('שגיאה בשמירת סדר'); }
 }
 
