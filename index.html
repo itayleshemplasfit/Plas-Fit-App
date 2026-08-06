@@ -698,7 +698,9 @@ async function loadVersionsFor(form, mold) {
   }
   try {
     const cacheKey = CACHE_CONFIG.versions.key + mold;
-    const data = await smartFetch('getVersions', { mold }, cacheKey, CACHE_CONFIG.versions.ttl);
+    const moldsData = lsCache.get(CACHE_CONFIG.molds.key) || await jsonp({ action: 'getMolds' });
+const found = (moldsData.molds || []).find(m => m.mold === mold);
+const data = { versions: found ? found.versions : [] };
     targets.forEach(id => {
       ssData[id] = data.versions || [];
       document.getElementById(id+'-input').disabled = false;
