@@ -1058,10 +1058,10 @@ function renderReports() {
   document.getElementById('reports-list').innerHTML = list.map(r => `
     <div class="report-card" onclick="showDetail(${allReports.indexOf(r)})">
       <div class="report-top">
-        <div class="report-type ${r.type==='תיקון תבנית'?'fix':'ver'}">${r.type==='תיקון תבנית'?'🔧':'🔄'} ${r.type}</div>
+        <div class="report-type ${r.type==='תיקון תבנית'?'fix':'ver'}">${r.type==='תיקון תבנית'?'🔧':'🔄'} ${r.type} — תבנית ${r.mold||''}</div>
         <span class="badge ${r.status==='ממתין'?'wait':'done'}">${r.status}</span>
       </div>
-      <div class="report-meta">${r.mold||''} | ${r.date||''} | ${r.email||''}${r.photo?' 📷':''}</div>
+      <div class="report-meta">${r.verCur||''}${r.verNew?' → '+r.verNew:''} | ${r.email||''} | ${dateOnly(r.date)}${r.photo?' 📷':''}</div>
     </div>`).join('');
 }
 
@@ -1162,6 +1162,15 @@ async function moveItem(type, idx, dir) {
   try {
     await apiPost({ action:'saveDashboardOrder', fix:dashData.fix.map(it=>it.id), ver:dashData.ver.map(it=>it.id) });
   } catch(e) { showToast('שגיאה בשמירת סדר'); }
+}
+
+function dateOnly(dateStr) {
+  if (!dateStr) return '';
+  const str = dateStr.toString();
+  // פורמט ISO: 2026-08-06T19:50:37.000Z
+  const match = str.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (match) return match[3] + '/' + match[2] + '/' + match[1];
+  return str.split(' ')[0] || str;
 }
 
 function showToast(msg) {
