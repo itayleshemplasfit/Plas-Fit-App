@@ -940,9 +940,15 @@ async function toggleMoldHistory(mold, btn) {
   } catch(e) { btn.textContent = `📋 שגיאה`; }
 }
 
+function openVerFromProductSearch(mold, sku) {
+  currentMold = mold;
+  showVerDetail(sku, 'screen-search');
+}
+
 // ── פרטי וורסיה ──
-async function showVerDetail(sku) {
+async function showVerDetail(sku, backTarget) {
   currentVer = sku;
+  document.getElementById('ver-detail-back').setAttribute('onclick', `goTo('${backTarget || 'screen-mold-detail'}')`);
   document.getElementById('ver-detail-title').textContent = sku;
   document.getElementById('ver-detail-content').innerHTML = '<div class="loader"><div class="spinner"></div>טוען...</div>';
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -1045,10 +1051,10 @@ function doSearchProducts() {
       }
       const ql = q.toLowerCase();
       document.getElementById('search-products-results').innerHTML = products.map(p => `
-        <div class="report-card">
-          <div class="report-top"><div style="font-size:14px;font-weight:600;color:var(--text)">${hl(String(p.desc||''),ql)}</div></div>
-          <div class="report-meta">מק"ט: ${hl(String(p.sku||''),ql)} | תבנית: ${p.mold}</div>
-        </div>`).join('');
+  <div class="report-card" onclick="openVerFromProductSearch('${String(p.mold||'').replace(/'/g,"\\'")}','${String(p.sku||'').replace(/'/g,"\\'")}')">
+    <div class="report-top"><div style="font-size:14px;font-weight:600;color:var(--text)">${hl(String(p.desc||''),ql)}</div></div>
+    <div class="report-meta">מק"ט: ${hl(String(p.sku||''),ql)} | תבנית: ${p.mold}</div>
+  </div>`).join('');
     } catch(e) { showToast('שגיאה בחיפוש'); }
   }, 400);
 }
