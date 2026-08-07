@@ -427,8 +427,8 @@ const CACHE_CONFIG = {
 };
 
 const PHOTO_CONFIG = {
-  maxWidth: 1200,
-  quality:  0.8,
+  maxWidth: 800,
+  quality:  0.6,
 };
 
 // ── State ──
@@ -948,7 +948,6 @@ async function showVerDetail(sku) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-ver-detail').classList.add('active');
   try {
-    // מצא פרטי וורסיה מפרטי התבנית הנוכחית
     const data = await smartFetch('getMoldDetails', { mold: currentMold }, CACHE_CONFIG.versions.key + currentMold, CACHE_CONFIG.versions.ttl);
     const ver = (data.versions || []).find(v => v.sku === sku);
     if (!ver) { document.getElementById('ver-detail-content').innerHTML = '<div class="empty">לא נמצאו פרטים</div>'; return; }
@@ -960,20 +959,36 @@ async function showVerDetail(sku) {
       { label: 'זמן מחזור (שניות)', value: ver.cycleTime || '—' },
       { label: 'צריכה שנתית', value: ver.annual || '—' },
     ];
-    document.getElementById('ver-detail-content').innerHTML = `
-      <div class="detail-card">
-        ${stats.map(s => `
-          <div class="detail-row">
-            <span class="dlabel">${s.label}</span>
-            <span class="dvalue">${s.value}</span>
-          </div>`).join('')}
-      </div>
-      <button class="history-btn" onclick="toggleVerHistory('${sku.replace(/'/g,"\\'")}', this)">📋 היסטוריית וורסיה ${sku}</button>
-      <div class="history-list" id="ver-history-${sku.replace(/[^a-zA-Z0-9]/g,'_')}"></div>`;
+
+    // טען מיקום ותמונות
+    let locData = { location:'', notes:'', photoProduct:'', photoInsert:'' };
+    try { locData = await jsonp({ action: 'getVerLocation', sku }); } catch(e) {}
+
+    const safeSkuJS = sku.replace(/'/g, "\\'");
+    const safeSkuId = sku.replace(/[^a-zA-Z0-9]/g,'_');
+
+    document.getElementById('ver-detail-content').innerHTML =
+      (locData.photoProduct ? '<div style="font-size:12px;color:var(--muted);margin-bottom:4px">📦 תמונת מוצר</div><img src="' + locData.photoProduct + '" class="detail-photo" onclick="window.open(\'' + locData.photoProduct + '\')" style="cursor:zoom-in">' : '') +
+      (locData.photoInsert  ? '<div style="font-size:12px;color:var(--muted);margin-bottom:4px">🔩 תמונת אינסרטים</div><img src="' + locData.photoInsert + '" class="detail-photo" onclick="window.open(\'' + locData.photoInsert + '\')" style="cursor:zoom-in">' : '') +
+      '<div class="detail-card">' +
+      stats.map(s => '<div class="detail-row"><span class="dlabel">' + s.label + '</span><span class="dvalue">' + s.value + '</span></div>').join('') +
+      (locData.location ? '<div class="detail-row"><span class="dlabel">📍 מיקום אינסרטים</span><span class="dvalue">' + locData.location + '</span></div>' : '') +
+      (locData.notes    ? '<div class="detail-row"><span class="dlabel">הערות מיקום</span><span class="dvalue">' + locData.notes + '</span></div>' : '') +
+      '</div>' +
+      '<div style="display:flex;gap:8px;margin-bottom:10px">' +
+      '<button class="btn-outline" style="flex:1" onclick="uploadVerPhotoUI(\'' + safeSkuJS + '\',\'product\')">📷 תמונת מוצר</button>' +
+      '<button class="btn-outline" style="flex:1" onclick="uploadVerPhotoUI(\'' + safeSkuJS + '\',\'insert\')">📷 תמונת אינסרטים</button>' +
+      '</div>' +
+      '<input type="file" id="ver-photo-upload" accept="image/*" capture="environment" style="display:none" onchange="handleVerPhotoUpload()">' +
+      '<div id="ver-photo-upload-status" style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px;display:none"></div>' +
+      '<button class="history-btn" onclick="toggleVerHistory(\'' + safeSkuJS + '\', this)">📋 היסטוריית וורסיה ' + sku + '</button>' +
+      '<div class="history-list" id="ver-history-' + safeSkuId + '"></div>';
+
   } catch(e) {
     document.getElementById('ver-detail-content').innerHTML = '<div class="empty">שגיאה בטעינת פרטים</div>';
   }
 }
+
 
 async function toggleVerHistory(sku, btn) {
   const listId = 'ver-history-' + sku.replace(/[^a-zA-Z0-9]/g,'_');
@@ -1089,7 +1104,7 @@ function showDetail(idx) {
       ${r.notes?`<div class="detail-row"><span class="dlabel">הערות</span><span class="dvalue">${r.notes}</span></div>`:''}
       <div class="detail-row"><span class="dlabel">סטטוס</span><span class="dvalue"><span class="badge ${r.status==='ממתין'?'wait':'done'}">${r.status}</span></span></div>
     </div>
-    <button class="btn-primary" onclick="toggleStatus(${idx})">${r.status==='ממתין'?'✅ סמן כבוצע':'⏳ החזר לממתין'}</button>`;
+    ${statusButtons(idx, r.status)}`;
   goTo('screen-detail');
 }
 
@@ -1098,10 +1113,38 @@ async function toggleStatus(idx) {
   try {
     const res = await jsonp({ action:'toggleStatus', id:r.id });
     if (res.success) {
-      r.status = res.newStatus;
+      if (res.newStatus === 'לא בסדנה') {
+        // הסר מהרשימה המקומית
+        allReports.splice(idx, 1);
+        lsCache.set(CACHE_CONFIG.reports.key, null, 0);
+        goTo('screen-reports');
+        showToast('🏭 תבנית סומנה כלא בסדנה');
+      } else {
+        r.status = res.newStatus;
+        lsCache.set(CACHE_CONFIG.reports.key, null, 0);
+        showDetail(idx);
+        showToast('סטטוס עודכן בהצלחה');
+      }
+    }
+  } catch(e) { showToast('שגיאה בעדכון סטטוס'); }
+}
+
+async function toggleStatusBack(idx) {
+  const r = allReports[idx];
+  try {
+    // עדכן ישירות לממתין
+    const res = await jsonp({ action:'toggleStatus', id:r.id });
+    if (res.success) {
+      // toggleStatus עובר בוצע->לא בסדנה->ממתין, אז נקרא שוב
+      if (res.newStatus !== 'ממתין') {
+        const res2 = await jsonp({ action:'toggleStatus', id:r.id });
+        if (res2.success) { r.status = res2.newStatus; }
+      } else {
+        r.status = res.newStatus;
+      }
       lsCache.set(CACHE_CONFIG.reports.key, null, 0);
       showDetail(idx);
-      showToast('סטטוס עודכן בהצלחה');
+      showToast('סטטוס עודכן');
     }
   } catch(e) { showToast('שגיאה בעדכון סטטוס'); }
 }
@@ -1162,6 +1205,54 @@ async function moveItem(type, idx, dir) {
   try {
     await apiPost({ action:'saveDashboardOrder', fix:dashData.fix.map(it=>it.id), ver:dashData.ver.map(it=>it.id) });
   } catch(e) { showToast('שגיאה בשמירת סדר'); }
+}
+
+let _verPhotoUploadSku = '';
+let _verPhotoUploadType = '';
+
+function uploadVerPhotoUI(sku, photoType) {
+  _verPhotoUploadSku = sku;
+  _verPhotoUploadType = photoType;
+  document.getElementById('ver-photo-upload').click();
+}
+
+async function handleVerPhotoUpload() {
+  const file = document.getElementById('ver-photo-upload').files[0];
+  if (!file) return;
+  const statusEl = document.getElementById('ver-photo-upload-status');
+  statusEl.style.display = 'block';
+  statusEl.textContent = '⏳ מעלה תמונה...';
+  try {
+    const base64 = await fileToBase64(file);
+    const res = await apiPost({
+      action: 'uploadVerPhoto',
+      sku: _verPhotoUploadSku,
+      photoType: _verPhotoUploadType,
+      base64,
+      mimeType: file.type,
+    });
+    if (res.success) {
+      statusEl.textContent = '✅ תמונה הועלתה בהצלחה!';
+      showToast('✅ תמונה הועלתה');
+      // רענן פרטי וורסיה
+      setTimeout(() => showVerDetail(_verPhotoUploadSku), 1000);
+    } else {
+      statusEl.textContent = '⚠️ שגיאה בהעלאה';
+    }
+  } catch(e) {
+    statusEl.textContent = '⚠️ שגיאה בהעלאה';
+  }
+}
+
+function statusButtons(idx, status) {
+  if (status === 'ממתין') {
+    return '<button class="btn-primary" onclick="toggleStatus(' + idx + ')">✅ סמן כבוצע</button>';
+  } else if (status === 'בוצע') {
+    return '<button class="btn-primary" style="background:var(--green)" onclick="toggleStatus(' + idx + ')">🏭 סמן כלא בסדנה</button>' +
+           '<button class="btn-secondary" onclick="toggleStatusBack(' + idx + ')">⏳ החזר לממתין</button>';
+  } else {
+    return '<div style="text-align:center;padding:10px;color:var(--muted);font-size:13px">🔒 לא בסדנה — מופיע בהיסטוריה בלבד</div>';
+  }
 }
 
 function dateOnly(dateStr) {
